@@ -1,0 +1,35 @@
+@include responsive(desktop) {
+  .d-d-none {
+    display: none !important;
+  }
+}
+@include responsive(tablet) {
+  .m-d-none {
+    display: none !important;
+  }
+
+  .m-mt-24 {
+    margin-top: 24px !important;
+  }
+
+  .m-flex-column {
+    flex-direction: column !important;
+  }
+
+  .m-align-items-start {
+    align-items: flex-start !important;
+  }
+}
+
+.clr-text-dark-secondary {
+  color: var(--clrDarkSecondary) !important;
+}
+
+.async-option {
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  > span {
+    margin-left: 5px;
+  }
+}

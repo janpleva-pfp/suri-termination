@@ -1,0 +1,6 @@
+apiVersion: v2
+name: pfp-terminate
+description: A Helm chart for PFP terminate application
+type: application
+version: <CHART_VERSION>
+appVersion: <VERSION>

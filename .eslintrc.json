@@ -1,0 +1,175 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "jest", "unused-imports"],
+  "extends": "next/core-web-vitals",
+  "globals": {
+    "JSX": true,
+    "NodeJS": true,
+    "devlogger": "readonly"
+  },
+  "env": {
+    "jest/globals": true
+  },
+  "rules": {
+    "@next/next/no-img-element": "off",
+    "import/prefer-default-export": 0,
+    "import/no-named-as-default": 0,
+    "react/jsx-props-no-spreading": 0,
+    "react/destructuring-assignment": 0,
+    "react/display-name": 1,
+    "react/jsx-filename-extension": [2, { "extensions": [
+      ".js", ".jsx", ".ts", ".tsx"
+    ] }],
+    "react/jsx-no-duplicate-props": [ 1, { "ignoreCase": true } ],
+    "react/jsx-no-undef": 1,
+    "react/jsx-pascal-case": 1,
+    "react/jsx-sort-props": [ 1, { "ignoreCase": false } ],
+    "react/jsx-uses-react": "off",
+    "react/jsx-uses-vars": 1,
+    "react/no-deprecated": 1,
+    "react/no-direct-mutation-state": 1,
+    "react/no-find-dom-node": 1,
+    "react/no-is-mounted": 1,
+    "react/no-render-return-value": 1,
+    "react/no-unknown-property": [1, { "ignore": ["global", "jsx"] }],
+    "react/prefer-es6-class": [ 1, "always" ],
+    "react/prop-types": 0,
+    "react/react-in-jsx-scope": "off",
+    "react/require-render-return": 1,
+    "react/self-closing-comp": 1,
+    "react/sort-comp": [ 1, {
+      "order": [
+        "everything-else",
+        "instance-variables",
+        "static-methods",
+        "lifecycle",
+        "instance-methods",
+        "render"
+      ]
+    } ],
+    "react/sort-prop-types": 1,
+    "react/require-default-props": 0,
+    "react/style-prop-object": 1,
+    "react/default-props-match-prop-types": 0,
+    "jsx-a11y/no-static-element-interactions": 0,
+    "jsx-a11y/click-events-have-key-events": 0,
+    "jsx-a11y/label-has-associated-control": 0,
+    "jsx-a11y/label-has-for": 0,
+    "jsx-a11y/media-has-caption": 0,
+
+    "max-len": [ "error", { "code": 150 } ],
+    "object-curly-spacing": [1, "always"],
+    "no-multiple-empty-lines": [1, { "max": 1, "maxEOF": 0 }],
+    "key-spacing": 1,
+    "curly": 0,
+    "consistent-return": 0,
+    "space-infix-ops": 1,
+    "camelcase": 0,
+    "no-spaced-func": 1,
+    "no-alert": 1,
+    "eol-last": 1,
+    "comma-spacing": 1,
+    "eqeqeq": 1,
+    "no-inline-comments": 0,
+    "no-console": "warn",
+    "no-shadow": "warn",
+    "@typescript-eslint/no-shadow": "warn",
+
+    //possible errors
+    "semi": 2,
+    "comma-dangle": 0,
+    "no-cond-assign": 2,
+    "no-constant-condition": 2,
+    "no-control-regex": 2,
+    "no-debugger": 2,
+    "no-dupe-args": 2,
+    "no-dupe-keys": 2,
+    "no-duplicate-case": 2,
+    "no-empty-character-class": 2,
+    "no-empty": 2,
+    "no-ex-assign": 2,
+    "no-extra-boolean-cast": 2,
+    "no-extra-parens": 0,
+    "no-extra-semi": 2,
+    "no-func-assign": 2,
+    "no-inner-declarations": 2,
+    "no-invalid-regexp": 2,
+    "no-irregular-whitespace": 2,
+    "no-negated-in-lhs": 2,
+    "no-obj-calls": 2,
+    "no-param-reassign": 0,
+    "no-plusplus": 0,
+    "no-regex-spaces": 2,
+    "no-sparse-arrays": 2,
+    "no-unexpected-multiline": 2,
+    "no-unreachable": 2,
+    "use-isnan": 2,
+    "valid-jsdoc": 0,
+    "valid-typeof": 2,
+
+    "no-redeclare": 2,
+
+    "init-declarations": "warn",
+    "no-catch-shadow": 2,
+    "no-delete-var": 2,
+    "no-label-var": 2,
+    "no-shadow-restricted-names": 2,
+    "no-undef-init": 2,
+    "no-undef": 2,
+    "no-undefined": 0,
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": [
+      "warn",
+      { "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }
+    ],
+    "no-use-before-define": "off",
+    "lines-between-class-members": "off",
+    "no-underscore-dangle": 0,
+
+    "import/no-extraneous-dependencies": 0,
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external", 
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "unknown"
+        ],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "@pfp/frontend-platform/dist/style.css",
+            "group": "unknown",
+            "position": "before"
+          },
+          {
+            "pattern": "bootstrap/dist/css/**",
+            "group": "unknown", 
+            "position": "before"
+          },
+          {
+            "pattern": "../**/*.scss",
+            "group": "unknown",
+            "position": "after"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["react"],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ]
+  }
+}

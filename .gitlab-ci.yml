@@ -1,0 +1,164 @@
+image: docker:27-cli
+
+variables:
+  CLIENT_SECRET: $CI_DEPLOY_CLIENT_SECRET
+  DOCKER_DRIVER: overlay2
+  DOCKER_HOST: tcp://docker:2376
+  DOCKER_TLS_CERTDIR: "/certs"
+  DOCKER_TLS_VERIFY: 1
+  DOCKER_CERT_PATH: "$DOCKER_TLS_CERTDIR/client"
+  PROJECT_VERSION: $CI_COMMIT_REF_NAME
+  PROJECT_VERSION_SLUG: $CI_COMMIT_REF_SLUG
+  PROJECT_GROUP: pfp
+  SERVICE_NAME: pfp-terminate
+  KUBE_NAMESPACE: pfp-terminate
+  PROJECT_IMAGE: $SERVICE_NAME
+  PROJECT_IMAGE_LATEST: eu.gcr.io/suri-179907/$PROJECT_GROUP/$SERVICE_NAME:latest
+  PROJECT_IMAGE_FULL: eu.gcr.io/suri-179907/$PROJECT_GROUP/$SERVICE_NAME:$CI_COMMIT_REF_NAME
+  NPM_USER: devx
+  NPM_REGISTRY: https://npm.s20.suri.cz
+  NPM_EMAIL: "office@devx.agency"
+  YARN_CACHE_FOLDER: "$CI_PROJECT_DIR/.yarn-cache"
+  YARN_MIRROR_FOLDER: "$CI_PROJECT_DIR/.yarn-mirror"
+
+.docker-setup: &docker-setup
+  tags:
+    - docker
+  services:
+    - name: docker:27-dind
+      command: ["--registry-mirror", "https://mirror.gcr.io"]
+  before_script:
+    - mkdir -p $HOME/.docker
+    - echo $DOCKER_AUTH_CONFIG > $HOME/.docker/config.json
+    - until docker info; do sleep 1; done
+
+cache:
+  paths:
+    - .yarn-mirror/
+
+stages:
+  - test
+  - build
+  - deploy-content
+  - deploy
+
+.install-yarn: &install-yarn
+  image: node:18.18
+  before_script:
+    - mkdir -p "$YARN_MIRROR_FOLDER"
+    - npx npm-cli-login -u $NPM_USER -p $CI_NPM_PASSWORD -e $NPM_EMAIL -r $NPM_REGISTRY -s @universum
+    - npx npm-cli-login -u $NPM_USER -p $CI_NPM_PASSWORD -e $NPM_EMAIL -r $NPM_REGISTRY -s @renomia
+    - npx npm-cli-login -u $NPM_USER -p $CI_NPM_PASSWORD -e $NPM_EMAIL -r $NPM_REGISTRY -s @pfp
+    - yarn config set yarn-offline-mirror "$YARN_MIRROR_FOLDER"
+    - yarn config set network-timeout 600000
+    - yarn config list
+    - npm config rm proxy
+    - npm config rm https-proxy
+    - yarn config list
+    - yarn install --ignore-scripts --prefer-offline
+
+deploy-content-dev:
+  image: node:18.18
+  stage: deploy-content
+  script:
+    - rm ./package.json && npm install axios && npm install form-data && npm install moment && node content/scripts/send-files-pipeline.js
+  only:
+    - master
+
+deploy-content-prod:
+  image: node:18.18
+  stage: deploy-content
+  when: manual
+  script:
+    - rm ./package.json && npm install axios && npm install form-data && npm install moment
+    - CONTENT_ENV=production node content/scripts/send-files-tag-pipeline.js
+  only:
+    - tags
+
+build docker for tag:
+  variables:
+    KUBERNETES_SERVICE_CPU_REQUEST: 1
+    KUBERNETES_SERVICE_CPU_LIMIT: 2
+    KUBERNETES_SERVICE_MEMORY_REQUEST: 2Gi
+    KUBERNETES_SERVICE_MEMORY_LIMIT: 2Gi
+  stage: build
+  <<: *docker-setup
+  script:
+    - | # avoid escaping problems between yaml and bash
+      sed -i 's#"version": ".*",$#"version": "'${CI_COMMIT_TAG:1}'",#g' package.json
+#    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - touch .env.local
+    - echo "NEXT_PUBLIC_CONTENT_SERVICE_API_URL='$NEXT_PUBLIC_CONTENT_SERVICE_API_URL'" | cat >> .env.local
+    - echo "NEXT_PUBLIC_CONTENT_SERVICE_API_BEARER_TOKEN='$NEXT_PUBLIC_CONTENT_SERVICE_API_BEARER_TOKEN'" | cat >> .env.local
+    - echo "NEXT_PUBLIC_INOVIS_API_URL='$NEXT_PUBLIC_INOVIS_API_URL'" | cat >> .env.local
+    - echo "NEXT_PUBLIC_INOVIS_API_BEARER_TOKEN='$NEXT_PUBLIC_INOVIS_API_BEARER_TOKEN'" | cat >> .env.local
+    - echo "NEXT_PUBLIC_STOMP_SERVER_URL='$NEXT_PUBLIC_STOMP_SERVER_URL'" | cat >> .env.local
+    - echo "NEXT_PUBLIC_MERK_API_KEY='$NEXT_PUBLIC_MERK_API_KEY'" | cat >> .env.local
+    - echo "NEXT_PUBLIC_STRAPI_TOKEN='$NEXT_PUBLIC_STRAPI_TOKEN'" | cat >> .env.local
+    - docker build -t $PROJECT_GROUP/$SERVICE_NAME:$PROJECT_VERSION --build-arg NPM_PASSWORD=$CI_NPM_PASSWORD .
+    - docker tag $PROJECT_GROUP/$SERVICE_NAME:$PROJECT_VERSION $PROJECT_IMAGE_FULL
+    - docker push $PROJECT_IMAGE_FULL
+    - docker tag $PROJECT_GROUP/$SERVICE_NAME:$PROJECT_VERSION $PROJECT_IMAGE_LATEST
+    - docker push $PROJECT_IMAGE_LATEST
+  only:
+    - tags
+  except:
+    - branches
+
+build helm chart:
+  image: dtforce/kubectl-gitlab-ci:4
+  stage: build
+  script:
+    - cd helm
+    - helm dependency build "./${SERVICE_NAME}/"
+    - sed -i "s#<VERSION>#${CI_COMMIT_TAG:1}#g" "${SERVICE_NAME}/Chart.yaml" "${SERVICE_NAME}/values.yaml"
+    - sed -i "s#<CHART_VERSION>#${CI_COMMIT_TAG:1}#g" "${SERVICE_NAME}/Chart.yaml" "${SERVICE_NAME}/values.yaml"
+    - cat "${SERVICE_NAME}/Chart.yaml" "${SERVICE_NAME}/values.yaml"
+    - helm package "./${SERVICE_NAME}/"
+    - curl -u "${HELM_REPO_USR}:${HELM_REPO_PWD}" --data-binary "@${SERVICE_NAME}-${CI_COMMIT_TAG:1}.tgz" https://chartmuseum.stage.inovis.renomia.cz/api/charts
+  only:
+    - /^v\d+\.\d+\.\d+?(-.*)?$/
+  except:
+    - branches
+
+.kube-login: &kube-login
+  image: dtforce/kubectl-gitlab-ci:4
+  before_script:
+    - echo "$K8S_CONFIG" | base64 -d > kubeconfig.local
+    - export KUBECONFIG=`pwd`/kubeconfig.local
+    - kubectl config use-context inovis-staging
+
+deploy to stage:
+  image: dtforce/kubectl-gitlab-ci:4
+  <<: *kube-login
+  when: manual
+  stage: deploy
+  script:
+    - cat "${CI_PROJECT_DIR}/helm/values-stage.yaml"
+    - helm repo add inovis https://chartmuseum.stage.inovis.renomia.cz
+    - helm upgrade -i -n "${KUBE_NAMESPACE}" "${SERVICE_NAME}" "inovis/${SERVICE_NAME}"
+      --version "${CI_COMMIT_TAG:1}"
+      --set image.tag="${CI_COMMIT_TAG}"
+      -f "${CI_PROJECT_DIR}/helm/values-stage.yaml"
+  environment:
+    name: inovis-staging
+  only:
+    - /^v\d+\.\d+\.\d+?(-.*)?$/
+  except:
+    - branches
+
+test:
+  <<: *install-yarn
+  stage: test
+  coverage: /^All files[^|]*\|[^|]*\s+([\d\.]+)/
+  variables:
+    KUBERNETES_CPU_LIMIT: 2
+    KUBERNETES_MEMORY_REQUEST: 2Gi
+    KUBERNETES_MEMORY_LIMIT: 2Gi
+  script:
+    - export NODE_ICU_DATA=./node_modules/full-icu
+    - yarn test -i --passWithNoTests
+  when: manual
+  only:
+    - merge_requests
+    - tags

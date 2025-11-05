@@ -1,0 +1,30 @@
+# Build outputs
+dist/
+.next/
+out/
+
+# Dependencies
+node_modules/
+
+# Generated files
+coverage/
+*.min.js
+*.bundle.js
+
+# Environment files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Other 
+public
+.*
+helm

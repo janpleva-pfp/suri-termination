@@ -1,0 +1,41 @@
+.container-sm {
+  width: 100%;
+  max-width: 618px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  @media (max-width: 576px) {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+
+.container-md {
+  width: 100%;
+  max-width: 832px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  @media (max-width: 576px) {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+
+.container-xl {
+  width: 100%;
+  max-width: 1185px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  @media (max-width: 576px) {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}

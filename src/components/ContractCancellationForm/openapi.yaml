@@ -1,0 +1,379 @@
+openapi: 3.0.3
+info:
+  title: Contract Cancellation Form API
+  description: API for submitting contract cancellation forms with support for different policy holder types and overpayment handling
+  version: 1.0.0
+  contact:
+    name: PFP s.r.o.
+    email: info@suri.cz
+  license:
+    name: Proprietary
+    url: https://www.suri.cz/vseobecne-obchodni-podminky/
+    
+servers:
+  - url: https://api.suri.cz/v1
+    description: Production server
+  - url: https://api-stage.suri.cz/v1
+    description: Staging server
+
+paths:
+  /contract-cancellation:
+    post:
+      summary: Submit contract cancellation form
+      description: Submits a complete contract cancellation form with policy holder information, contract details, and optional digital signature
+      operationId: submitContractCancellation
+      tags:
+        - Contract Cancellation
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContractCancellationRequest'
+            examples:
+              person_example:
+                summary: Individual person cancellation
+                value:
+                  contractNumber: "123456789"
+                  insuranceCompany: "allianz"
+                  contractTerminationReason: "anniversaryOfInsuranceContract"
+                  policyHolderType: "person"
+                  firstName: "Jan"
+                  lastName: "Novák"
+                  birthNumber: "8001010001"
+                  street: "Václavské náměstí 1"
+                  town: "Praha"
+                  zip: "11000"
+                  phoneNumber: "420123456789"
+                  email: "jan.novak@example.com"
+                  overpaymentSendTo: "bankAccount"
+                  bankAccount: "123456789/0100"
+                  signature: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="
+              company_example:
+                summary: Company cancellation
+                value:
+                  contractNumber: "987654321"
+                  insuranceCompany: "kooperativa"
+                  contractTerminationReason: "differentReason"
+                  differentReason: "Přestěhování firmy do zahraničí"
+                  policyHolderType: "self-employed"
+                  ico: "12345678"
+                  companyName: "Novák s.r.o."
+                  companyID: "CZ12345678"
+                  street: "Národní třída 25"
+                  town: "Brno"
+                  zip: "60200"
+                  phoneNumber: "420987654321"
+                  email: "info@novak.com"
+                  overpaymentSendTo: "address"
+      responses:
+        '201':
+          description: Contract cancellation submitted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractCancellationResponse'
+              example:
+                id: "cc_1234567890"
+                status: "submitted"
+                submittedAt: "2025-08-03T14:30:00Z"
+                referenceNumber: "CC-2025-001234"
+                message: "Žádost o zrušení smlouvy byla úspěšně odeslána"
+        '400':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "validation_error"
+                message: "Neplatné údaje ve formuláři"
+                details:
+                  - field: "email"
+                    message: "Neplatný formát e-mailové adresy"
+                  - field: "zip"
+                    message: "PSČ musí obsahovat přesně 5 číslic"
+        '401':
+          description: Unauthorized - invalid or missing authentication token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "unauthorized"
+                message: "Neplatný nebo chybějící autentizační token"
+        '422':
+          description: Unprocessable entity - business logic validation failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "business_validation_error"
+                message: "Smlouva s tímto číslem již byla zrušena"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "internal_error"
+                message: "Došlo k neočekávané chybě serveru"
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT token for authentication
+      
+  schemas:
+    ContractCancellationRequest:
+      type: object
+      required:
+        - contractNumber
+        - insuranceCompany
+        - contractTerminationReason
+        - policyHolderType
+        - street
+        - town
+        - zip
+        - phoneNumber
+        - email
+        - overpaymentSendTo
+      properties:
+        contractNumber:
+          type: string
+          description: Insurance contract number
+          example: "123456789"
+          pattern: "^[0-9A-Za-z/-]+$"
+          minLength: 5
+          maxLength: 50
+        insuranceCompany:
+          type: string
+          description: Insurance company identifier
+          enum:
+            - allianz
+            - ceska-pojistovna
+            - kooperativa
+            - generali
+            - uniqa
+            - csob-pojistovna
+            - direct
+            - hasicska-vzajemna-pojistovna
+            - wuestenrot
+            - axa
+            - colonnade
+            - slavia-pojistovna
+            - triglav
+            - ergo
+          example: "allianz"
+        contractTerminationReason:
+          type: string
+          description: |
+            Reason for contract termination.
+            **Conditional Logic**: If 'differentReason' is selected, then 'differentReason' field becomes required.
+          enum:
+            - anniversaryOfInsuranceContract
+            - maxTwoMonthsFromChange
+            - oneMonthFromChange
+            - disabledVehicle
+            - changeOfOwnerCar
+            - differentReason
+          example: "anniversaryOfInsuranceContract"
+        differentReason:
+          type: string
+          description: |
+            Custom termination reason text.
+            **Required when**: contractTerminationReason = 'differentReason'
+          example: "Přestěhování do zahraničí"
+          maxLength: 500
+        policyHolderType:
+          type: string
+          description: |
+            Type of policy holder.
+            **Conditional Logic**:
+            - If 'person': firstName, lastName, birthNumber are required
+            - If 'self-employed': ico, companyName are required (companyID is optional)
+          enum:
+            - person
+            - self-employed
+          example: "person"
+        firstName:
+          type: string
+          description: |
+            First name of the policy holder.
+            **Required when**: policyHolderType = 'person'
+          example: "Jan"
+          pattern: "^[a-zA-ZáčďéěíňóřšťúůýžÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ\\s\\-']+$"
+          minLength: 1
+          maxLength: 50
+        lastName:
+          type: string
+          description: |
+            Last name of the policy holder.
+            **Required when**: policyHolderType = 'person'
+          example: "Novák"
+          pattern: "^[a-zA-ZáčďéěíňóřšťúůýžÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ\\s\\-']+$"
+          minLength: 1
+          maxLength: 50
+        birthNumber:
+          type: string
+          description: |
+            Birth number (Czech: rodné číslo).
+            **Required when**: policyHolderType = 'person'
+          example: "8001010001"
+          pattern: "^\\d{9,10}$"
+        ico:
+          type: string
+          description: |
+            Company identification number (Czech: IČO).
+            **Required when**: policyHolderType = 'self-employed'
+          example: "12345678"
+          pattern: "^\\d{8}$"
+        companyName:
+          type: string
+          description: |
+            Company name.
+            **Required when**: policyHolderType = 'self-employed'
+          example: "Novák s.r.o."
+          minLength: 1
+          maxLength: 100
+        companyID:
+          type: string
+          description: |
+            Company tax ID (Czech: DIČ).
+            **Optional when**: policyHolderType = 'self-employed'
+          example: "CZ12345678"
+          pattern: "^[A-Z]{2}\\d{8,12}$"
+        street:
+          type: string
+          description: Street address including house number
+          example: "Václavské náměstí 1"
+          minLength: 1
+          maxLength: 100
+        town:
+          type: string
+          description: City/town name
+          example: "Praha"
+          pattern: "^[a-zA-ZáčďéěíňóřšťúůýžÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ\\s\\-']+$"
+          minLength: 1
+          maxLength: 50
+        zip:
+          type: string
+          description: Postal code (5 digits)
+          example: "11000"
+          pattern: "^\\d{5}$"
+        phoneNumber:
+          type: string
+          description: Phone number with country code (without + prefix)
+          example: "420123456789"
+          pattern: "^\\d{9,15}$"
+        email:
+          type: string
+          format: email
+          description: Email address for communication
+          example: "jan.novak@example.com"
+          maxLength: 100
+        overpaymentSendTo:
+          type: string
+          description: |
+            Where to send overpayment refund.
+            **Conditional Logic**: If 'bankAccount' or 'otherAccount' is selected, then 'bankAccount' field becomes required.
+          enum:
+            - bankAccount
+            - otherAccount
+            - address
+          example: "bankAccount"
+        bankAccount:
+          type: string
+          description: |
+            Bank account number in Czech format (account/bank_code).
+            **Required when**: overpaymentSendTo = 'bankAccount' OR overpaymentSendTo = 'otherAccount'
+          example: "123456789/0100"
+          pattern: "^\\d{1,16}/\\d{4}$"
+        signature:
+          type: string
+          description: Base64 encoded digital signature image (PNG, JPEG, or JPG format)
+          example: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="
+          pattern: "^data:image/(png|jpeg|jpg);base64,[A-Za-z0-9+/]+=*$"
+          
+    ContractCancellationResponse:
+      type: object
+      required:
+        - id
+        - status
+        - submittedAt
+        - referenceNumber
+        - message
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the cancellation request
+          example: "cc_1234567890"
+        status:
+          type: string
+          description: Current status of the cancellation
+          enum:
+            - submitted
+            - processing
+            - approved
+            - rejected
+          example: "submitted"
+        submittedAt:
+          type: string
+          format: date-time
+          description: Timestamp when the request was submitted
+          example: "2025-08-03T14:30:00Z"
+        referenceNumber:
+          type: string
+          description: Human-readable reference number
+          example: "CC-2025-001234"
+        message:
+          type: string
+          description: Status message for the user
+          example: "Žádost o zrušení smlouvy byla úspěšně odeslána"
+        estimatedProcessingTime:
+          type: string
+          description: Estimated processing time
+          example: "5-7 pracovních dnů"
+          
+    ErrorResponse:
+      type: object
+      required:
+        - error
+        - message
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: "validation_error"
+        message:
+          type: string
+          description: Human-readable error message
+          example: "Neplatné údaje ve formuláři"
+        details:
+          type: array
+          description: Detailed validation errors
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+                description: Field name that caused the error
+                example: "email"
+              message:
+                type: string
+                description: Field-specific error message
+                example: "Neplatný formát e-mailové adresy"
+            required:
+              - field
+              - message
+
+tags:
+  - name: Contract Cancellation
+    description: Operations related to insurance contract cancellation

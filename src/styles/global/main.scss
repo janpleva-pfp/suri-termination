@@ -1,0 +1,34 @@
+.bg-gradient-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 230px;
+  height: 230px;
+  background-image: url('/img/bg-shape.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: right center;
+  @media screen and (min-width: 768px) {
+    width: 350px;
+    height: 350px;
+  }
+  @media screen and (min-width: 1200px) {
+    width: 512px;
+    height: 512px;
+  }
+}
+
+.decoration-none {
+  text-decoration: none !important;
+}
+
+.responsive-button {
+  @media screen and (max-width: 568px) {
+   width: 100%;
+  }
+}
+
+.opacity-50 {
+  opacity: 0.5;
+  pointer-events: none;
+}

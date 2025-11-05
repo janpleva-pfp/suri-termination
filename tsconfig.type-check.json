@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "noEmit": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "src/**/*",
+    "server/**/*",
+    "config/**/*",
+    "constants/**/*",
+    "__tests__/**/*",
+    "server/**/*.ts",
+    "server/**/*.tsx"
+  ],
+  "exclude": ["node_modules", "dist", ".next"]
+}

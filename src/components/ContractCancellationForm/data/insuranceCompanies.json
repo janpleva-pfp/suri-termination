@@ -1,0 +1,50 @@
+[
+  {
+    "value": "allianz",
+    "label": "Allianz pojišťovna"
+  },
+  {
+    "value": "ceska-pojistovna",
+    "label": "Česká pojišťovna"
+  },
+  {
+    "value": "kooperativa",
+    "label": "Kooperativa pojišťovna"
+  },
+  {
+    "value": "generali",
+    "label": "Generali Česká pojišťovna"
+  },
+  {
+    "value": "uniqa",
+    "label": "UNIQA pojišťovna"
+  },
+  {
+    "value": "direct",
+    "label": "Direct pojišťovna"
+  },
+  {
+    "value": "slavia",
+    "label": "Slavia pojišťovna"
+  },
+  {
+    "value": "hasicska",
+    "label": "Hasičská vzájemná pojišťovna"
+  },
+  {
+    "value": "colonnade",
+    "label": "Colonnade Insurance"
+  },
+  {
+    "value": "triglav",
+    "label": "Triglav pojišťovna"
+  },
+  {
+    "value": "axa",
+    "label": "AXA pojišťovna"
+  },
+  {
+    "value": "wuestenrot",
+    "label": "Wüstenrot pojišťovna"
+  }
+]

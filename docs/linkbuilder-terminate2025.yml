@@ -1,0 +1,263 @@
+openapi: 3.0.0
+info:
+  title: Data pro aplikaci výpovědi v linkbuilderu
+  description: Data pro aplikaci výpovědi v linkbuilderu
+  version: 1.0.0
+servers:
+  - url: https://stage.inovis.renomia.cz/
+    description: Stage server
+  - url: https://inovis.renomia.cz/
+    description: Production server
+paths:
+  /link-builder/link/{uuid}:
+    get:
+      summary: Získání dat
+      description: Získání dat podle UUID
+      parameters:
+        - in: path
+          name: uuid
+          description: klíč pod kterým jsou data v linkbuilderu uložena
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Data získána úspěšně
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Terminate2025Request'
+        404:
+          description: Data nenalezena
+  /link-builder/generic/terminate2025:
+    post:
+      summary: Ukládání dat
+      description: Ukládání dat pro terminate2025
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Terminate2025Request'
+      responses:
+        200:
+          description: Data uložena úspěšně
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  linkId:
+                    type: string
+                    example: "7af203a3-74e2-457c-b524-2bbe766fb496"
+                  expiresAt:
+                    type: string
+                    format: date-time
+                    example: "2026-04-08T12:17:15.987207459"
+                  _links:
+                    type: object
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: "[https://staging.suri.cz/iam/terminate-form/car?linkId=7af203a3-74e2-457c-b524-2bbe766fb496](https://staging.suri.cz/iam/terminate-form/car?linkId=7af203a3-74e2-457c-b524-2bbe766fb496)"
+                      ref:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: "[https://staging.suri.cz/iam/terminate-form/car?linkId=7af203a3-74e2-457c-b524-2bbe766fb496](https://staging.suri.cz/iam/terminate-form/car?linkId=7af203a3-74e2-457c-b524-2bbe766fb496)"
+        400:
+          description: Chyba v požadavku
+components:
+  schemas:
+    Terminate2025Request:
+      type: object
+      required:
+      - website
+      - product
+      properties:
+        type:
+          type: string
+          description: Typ požadavku
+        website:
+          type: string
+          description: Webová adresa
+          enum:
+            - suri.cz
+            - srovnator.cz
+            - povinne-ruceni.com
+        affiliate:
+          type: string
+          description: Affiliate, obsah cookie affliate
+        product:
+          type: string
+          description: Produkt, zatím jen car
+        data:
+          type: object
+          description: Primárně pro data z formuláře aplikace výpovědi
+          properties:
+            contractNumber:
+              type: string
+              description: Číslo smlouvy
+            contractTerminationReason:
+              type: string
+              enum:
+                - anniversaryOfInsuranceContract
+                - maxTwoMonthsFromChange
+                - oneMonthFromChange
+                - disabledVehicle
+                - changeOfOwnerCar
+                - vehicleStolen
+                - differentReason
+              description: |
+                Důvod ukončení smlouvy, možné hodnoty:
+                - anniversaryOfInsuranceContract: Výročí pojistné smlouvy
+                - maxTwoMonthsFromChange: Výpověď do 2 měsíců od data sjednání
+                - oneMonthFromChange: Výpověď do 1 měsíce od změny pojistného
+                - disabledVehicle: Vyřazení z registru vozidel
+                - changeOfOwnerCar: Změna vlastníka
+                - vehicleStolen: Odcizení vozidla
+                - differentReason: Jiný důvod
+            differentReason:
+              type: string
+              description: Jiný důvod - pro variantu differentReason v contractTerminationReason
+            overpaymentSendTo:
+              type: string
+              description: Kam odeslat přeplatek
+              enum:
+                - bankAccount
+                - address
+            policyHolder:
+              type: object
+              description: Pojistník - údaje o klientovi ve snaze dodržovat strukturu Inovisu
+              properties:
+                type:
+                  type: string
+                  description: Typ osoby
+                  enum:
+                    - self-employed
+                    - person	
+                    - company
+                firstName:
+                  type: string
+                  description: Jméno
+                lastName:
+                  type: string
+                  description: Příjmení
+                birthNumber:
+                  type: string
+                  description: Rodné číslo
+                companyName:
+                  type: string
+                  description: Název společnosti
+                companyID:
+                  type: string
+                  description: IČO
+                street:
+                  type: string
+                  description: Ulice
+                town:
+                  type: string
+                  description: Město
+                zip:
+                  type: string
+                  description: PSČ
+                bankAccount:
+                  type: string
+                  description: Bankovní účet
+                phoneNumber:
+                  type: string
+                  description: Telefonní číslo
+                email:
+                  type: string
+                  description: E-mail
+            provider:
+              type: object
+              description: Informace o pojišťovně
+              properties:
+                companyIdentificationNumber:
+                  type: string
+                  description: IČO
+                nameFull:
+                  type: string
+                  description: Název pojišťovny pro zobrazení
+                contentKey:
+                  type: string
+                  description: Klíč v global contentu pro danou pojišťovnu
+        properties:
+          type: object
+          description: Informace a nastavení z CRM, FE aplikace tato data jen přenáší
+          properties:
+            agent:
+              type: object
+              description: Informace o operátorovi callcentra PFP
+              properties:
+                username:
+                  type: string
+                  description: Přihlašovací jméno, hlavní klíč k operátorovi
+                firstName:
+                  type: string
+                  description: Jméno
+                lastName:
+                  type: string
+                  description: Příjmení
+                email:
+                  type: string
+                  format: email
+                  description: E-mailová adresa operátora
+                phone:
+                  type: string
+                  description: Telefonní číslo operátora
+            callFrom:
+              type: string
+              description: informace o zdroji v CRM
+        trackingParams:
+          description: Marketingové informace z cookies klienta, plní FE
+          type: object
+          properties:
+            pfpUid: 
+              type: string
+              description: Identifikace session, UUID z cookie pfp-uid
+      example:
+        type: "terminate2025"
+        website: "suri.cz"
+        affiliate: "leadgenia"
+        product: "car"
+        data:
+          contractNumber: "1234567890"
+          contractTerminationReason: "maxTwoMonthsFromChange"
+          differentReason: ""
+          overpaymentSendTo: "bankAccount"
+          policyHolder:
+            type: "self-employed"
+            firstName: "gab"
+            lastName: "tester"
+            birthNumber: "9606117246"
+            companyName: "some company"
+            companyID: "70252017"
+            street: "Sosnová 123"
+            town: "Třinec - Dolní Líštná"
+            zip: "73961"
+            bankAccount: "9606117246/1234"
+            phoneNumber: "733314663"
+            email: "testing@renomia.cz"
+          provider:
+            companyIdentificationNumber: "27116913"
+            nameFull: "Pojišťovna VZP, a.s."
+            contentKey: "vzp"
+        properties:
+          agent:
+            username: "pavel.zampach@suri.cz"
+            firstName: "Pavel"
+            lastName: "Zampach" 
+            email: "pavel.zampach@suri.cz"
+            phone: "777777777"
+          callFrom: "ORDER: 801QI00000Wn9avYAB"
+        trackingParams:
+          pfpUid: "9916ec74-144e-403a-9824-117471d99153"

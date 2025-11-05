@@ -1,0 +1,29 @@
+@font-face {
+  font-family: 'Basier Circle';
+  src: local('Basier Circle Circle Regular'), local('Basier-Circle-Circle-Regular'),
+    url('/fonts/BasierCircle-Regular.woff2') format('woff2'), url('/fonts/BasierCircle-Regular.woff') format('woff'),
+    url('/fonts/BasierCircle-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Basier Circle';
+  src: local('Basier Circle Circle Medium'), local('Basier-Circle-Circle-Medium'),
+    url('/fonts/BasierCircle-Medium.woff2') format('woff2'), url('/fonts/BasierCircle-Medium.woff') format('woff'),
+    url('/fonts/BasierCircle-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Basier Circle';
+  src: local('Basier Circle Circle SemiBold'), local('Basier-Circle-Circle-SemiBold'),
+    url('/fonts/BasierCircle-SemiBold.woff2') format('woff2'), url('/fonts/BasierCircle-SemiBold.woff') format('woff'),
+    url('/fonts/BasierCircle-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}

@@ -1,0 +1,331 @@
+openapi: 3.0.0
+info:
+  title: Endpoint PFP CRM pro příjem požadavku na odeslání e-mailu
+  description: Požadavek do CRM jde přes proxy Inovisu a je zabezpečen autentifikací OAUTH2 stejně jako jiné Inovis služby. V CRM je endpoint v /public/object-email
+  version: 1.0.0
+
+servers:
+  - url: https://stage.inovis.renomia.cz/
+    description: Stage server
+  - url: https://inovis.renomia.cz/
+    description: Production server
+
+paths:
+  /sf-public/object-email:
+    post:
+      tags:
+      - Object email
+      summary: Odeslání požadavku na odeslání e-mailu
+      description: Odeslání požadavku na odeslání e-mailu
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObjectEmailRequest'
+      responses:
+        200:
+          description: Email odeslán úspěšně
+        400:
+          description: Chyba v žádosti
+        500:
+          description: Interní chyba serveru
+
+components:
+  schemas:
+    ObjectEmailRequest:
+      type: object
+      required:
+      - objectType
+      - emailType
+      - data
+      - securityHash
+      - email
+      properties:
+        objectType:
+          type: string
+          enum:
+            - terminate2025
+          example: terminate2025
+        emailType:
+          type: string
+          description: Typ emailu
+          enum:
+            - linkToClient
+            - instructionsToClient
+            - terminateToInsurer
+            - completionToClient
+            - terminateToBackoffice
+            - transferNotifyToClient
+          example: linkToClient
+        linkToObject:
+          type: boolean
+          example: true
+          default: true
+        securityHash:
+          type: string
+          example: iKFHHhIRs7tbXiP
+          description: |
+            Hash z salt + recipients + objectType 
+            - email se neodešle, pokud se nebude shodovat zaslaný hash s vygenerovaným v CRM.
+            - toHex(sha256(salt + recipients + objectType))
+            - např. toHex(sha256(salt + "jaroslav.pour@srovnator.czinfo@suri.cz" + "terminate2025"))
+        data:
+          type: object
+          description: data potřebná pro identifikaci objektu v CRM kam se odeslaný email připne
+          properties:
+            contractNumber:
+              type: string
+              example: 1234567890
+            provider:
+              type: object
+              properties:
+                companyIdentificationNumber:
+                  type: string
+                  example: 27116913
+            policyHolder:
+              type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                    - person
+                    - self-employed
+                    - company
+                  example: self-employed
+                firstName:
+                  type: string
+                  example: gab
+                lastName:
+                  type: string
+                  example: tester
+                birthNumber:
+                  type: string
+                  example: 9606117246
+                companyName:
+                  type: string
+                  example: some company
+                companyID:
+                  type: string
+                  example: 70252017
+                street:
+                  type: string
+                  example: Sosnová 123
+                town:
+                  type: string
+                  example: Třinec - Dolní Líštná
+                zip:
+                  type: string
+                  example: 73961
+                bankAccount:
+                  type: string
+                  example: 9606117246/1234
+                phoneNumber:
+                  type: string
+                  example: 733314663
+                email:
+                  type: string
+                  example: testing@renomia.cz
+        email:
+          type: object
+          description: Objekt email je kompatibilní s API Inovis pdf-service
+          required:
+          - recipients
+          - sender
+          - subject
+          - body
+          properties:
+            senderStyle:
+              type: string
+              enum:
+                - reply-to
+              example: reply-to
+              default: reply-to
+            recipients:
+              type: array
+              items:
+                type: object
+                properties:
+                  email:
+                    type: string
+                    example: jaroslav.pour@srovnator.cz
+            bcc:
+              type: array
+              items:
+                type: string
+            sender:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: pavel.zampach@suri.cz
+                name:
+                  type: string
+                  example: Pavel Žampach
+            headers:
+              type: array
+              items:
+                type: string
+            subject:
+              type: object
+              properties:
+                _type:
+                  type: string
+                  enum:
+                    - static
+                  example: static
+                value:
+                  type: string
+                  example: Výpověď smlouvy 1234567980
+            body:
+              type: object
+              properties:
+                _type:
+                  type: string
+                  enum:
+                    - template
+                  example: template
+                path:
+                  type: string
+                  example: pfp/email/terminate/instructionsToClient
+                parameters:
+                  type: object
+                  properties:
+                    emailTerminateType:
+                      type: string
+                    type:
+                      type: string
+                      enum:
+                        - terminate2025
+                      example: terminate2025
+                    product:
+                      type: string
+                      example: car
+                    website:
+                      type: string
+                      example: suri.cz
+                    contractNumber:
+                      type: string
+                      example: 1234567890
+                    contractTerminationReason:
+                      type: string
+                      example: oneMonthFromChange
+                    needAttachment:
+                      type: string
+                      example: vehicleRegistrationRecord
+                    terminateFinisher:
+                      type: string
+                      enum:
+                        - client
+                        - backoffice
+                        - api
+                      example: client
+                    terminateLink:
+                      type: string
+                      example: https://xxx.suri.cz?linkId=uuid
+                    policyHolder:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          enum:
+                            - person
+                            - self-employed
+                            - company
+                          example: self-employed
+                        firstName:
+                          type: string
+                          example: gab
+                        lastName:
+                          type: string
+                          example: tester
+                        phoneNumber:
+                          type: string
+                          example: 733314663
+                        email:
+                          type: string
+                          example: testing@renomia.cz
+                    provider:
+                      type: object
+                      properties:
+                        companyIdentificationNumber:
+                          type: string
+                          example: 27116913
+                        nameFull:
+                          type: string
+                          example: Pojišťovna VZP, a.s.
+                        abbreviation:
+                          type: string
+                          example: PVZP
+                    properties:
+                      type: object
+                      properties:
+                        agent:
+                          type: object
+                          properties:
+                            username:
+                              type: string
+            attachments:
+              type: array
+              items:
+                $ref: '#/components/schemas/Attachment'
+                  
+    Attachment:
+      type: object
+      properties:
+        _type:
+          type: string
+          enum:
+            - link
+            - template
+            - base64file
+        fileName:
+          type: string
+        link:
+          type: string
+          format: uri
+        path:
+          type: string
+          description: |
+            efwefwe
+        version:
+          type: string
+          description: verze šablony pro _type template  
+        type:
+          type: string
+          enum:
+            - PDF
+            - XLS
+          description: typ souboru pro _type template, PDF je default
+        parameters:
+          type: object
+          description: parametry pro renderování PDF přílohy pro _type template
+      example: |
+        [
+          {
+              "_type": "link",
+              "fileName": "vypoved.png",
+              "link": "https://termination.url.suri.cz/signed/1234567890-2025-03-26T16_35_00.pdf"
+          },
+          {
+            "_type" : "base64file",
+            "fileName" : "vypoved.png",
+            "encodedFile" : "PCFET0NUWVBFIGh0bWw+CjxodG1sIHhtbG5zOnRoPSJodHRwOi8vd3d3LnRoeW1lbGVhZi5vcmciIHhtbG5zOmR0Zj0iaHR0cDovL3d3dy5kdGZvcmNlLmNvbSI+CiAgICA8aGVhZD4KICAgICAgICA8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgogICAgICAgICAgICBAbWVkaWEgYWxsIHsKICAgICAgICAgICAgICAgIGJvZHkgewogICAgICAgICAgICAgICAgICAgIGZvbnQtZmFtaWx5OiAnT3BlbiBTYW5zJzsKICAgICAgICAgICAgICAgICAgICBmb250LXNpemU6IDExcHg7CiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgIH0KICAgICAgICA8L3N0eWxlPgogICAgPC9oZWFkPgogICAgPGJvZHk+CiAgICAgICAgPGRpdiB0aDpmcmFnbWVudD0iaGVhZGVyIiB4bWxuczp0aD0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCI+CiAgICAgICAgICAgIDxoMT4gSSBBTSBBIFJFTEFUSVZFIElNUE9SVEVEIEhFQURFUiA8L2gxPgogICAgICAgICAgICA8ZGl2PgogICAgICAgICAgICAgICAgPHA+IEFuZCBpIGNvbnRhaW4gb3RoZXIgZGF0YSBzdWNoIGFzIDogPC9wPgogICAgICAgICAgICAgICAgPHVsPgogICAgICAgICAgICAgICAgICAgIDxsaT5bWyR7dGVzdExpc3QuZmlyc3R9XV08L2xpPgogICAgICAgICAgICAgICAgICAgIDxsaT5bWyR7dGVzdExpc3Quc2Vjb25kfV1dPC9saT4KICAgICAgICAgICAgICAgICAgICA8bGk+PHN0cm9uZz5bWyR7dGVzdExpc3QuZmlyc3R9XV08L3N0cm9uZz48L2xpPgogICAgICAgICAgICAgICAgPC91bD4KICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgPC9kaXY+CiAgICAgICAgPGRpdj4KICAgICAgICAgICAgPGRpdiBkdGY6bWFya2Rvd249IiR7bWFya2Rvd25IZWFkZXJ9Ij5BbnkgdGV4dCBoZXJlIGlzIGlnbm9yZWQsIHJlcGxhY2VkIHdpdGggY29udGVudCBvZiB0aGUgdmFyaWFibGU8L2Rpdj4KICAgICAgICAgICAgPGRpdiBkdGY6bWFya2Rvd249IiR7bWFya2Rvd25MaW5rfSI+PC9kaXY+CiAgICAgICAgICAgIDxkaXYgZHRmOm1hcmtkb3duPSIke21hcmtkb3duVW5vcmRlcmVkTGlzdH0iPjwvZGl2PgogICAgICAgICAgICA8ZGl2IGR0ZjptYXJrZG93bj0iJHttYXJrZG93bk9yZGVyZWRMaXN0fSI+PC9kaXY+CiAgICAgICAgICAgIDxkaXYgZHRmOm1hcmtkb3duPSIke21hcmtkb3duTm9uRXhpc3Rpbmd9Ij5UaGlzIGlzIG5vbi1leGlzdGluZyB2YXJpYWJsZSAtPiBlbXB0eSBwYXJhZ3JhcGg8L2Rpdj4KICAgICAgICA8L2Rpdj4KICAgIDwvYm9keT4KPC9odG1sPgo="
+          },
+          {
+            "_type" : "template",
+            "path" : "test/toFill",
+            "version" : "1",
+            "fileName" : "test--1125893464.pdf",
+            "type" : "PDF",
+            "parameters" : {
+              "testList" : {
+                "first" : "Příliš žluťoučký kůň úpěl ďábelské ódy. #-681572618",
+                "second" : true
+              }
+            }
+          }
+        ]
+
+
+

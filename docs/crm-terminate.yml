@@ -1,0 +1,194 @@
+openapi: 3.0.0
+info:
+  title: Endpoint PFP CRM pro příjem výpovědí smlouvy
+  description: Požadavek do CRM jde přes proxy Inovisu a je zabezpečen autentifikací OAUTH2 stejně jako jiné Inovis služby. V CRM je endpoint v /public/terminate-contract
+  version: 1.0.0
+
+servers:
+  - url: https://stage.inovis.renomia.cz/
+    description: Stage server
+  - url: https://inovis.renomia.cz/
+    description: Production server
+
+paths:
+  /sf-public/terminate-contract:
+    post:
+      summary: Odeslání žádosti o ukončení smlouvy
+      description: Odeslání žádosti o ukončení smlouvy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TerminateContractRequest'
+      responses:
+        200:
+          description: Žádost odeslána úspěšně
+        400:
+          description: Chyba v žádosti
+        500:
+          description: Interní chyba serveru
+
+components:
+  schemas:
+    TerminateContractRequest:
+      type: object
+      required:
+          - type
+          - product
+          - website
+          - contractNumber
+          - contractTerminationReason
+          - provider
+          - terminationState
+          - linkId
+          - policyHolder
+      properties:
+        type:
+          type: string
+          example: "terminate2025"
+          description: Jen terminate2025
+        product:
+          type: string
+          example: "car"
+          description: Produkt, zatím jen car
+        website:
+          type: string
+          example: "suri.cz"
+          description: Webová adresa
+          enum:
+            - suri.cz
+            - srovnator.cz
+            - povinne-ruceni.com
+        contractNumber:
+          type: string
+          example: "1234567890"
+          description: Číslo smlouvy
+        contractTerminationReason:
+          type: string
+          example: "oneMonthFromChange"
+          enum:
+                - anniversaryOfInsuranceContract
+                - maxTwoMonthsFromChange
+                - oneMonthFromChange
+                - disabledVehicle
+                - changeOfOwnerCar
+                - vehicleStolen
+                - differentReason
+          description: |
+                Důvod ukončení smlouvy, možné hodnoty:
+                - anniversaryOfInsuranceContract: Výročí pojistné smlouvy
+                - maxTwoMonthsFromChange: Výpověď do 2 měsíců od data sjednání
+                - oneMonthFromChange: Výpověď do 1 měsíce od změny pojistného
+                - disabledVehicle: Vyřazení z registru vozidel
+                - changeOfOwnerCar: Změna vlastníka
+                - vehicleStolen: Odcizení vozidla
+                - differentReason: Jiný důvod
+        differentReason: 
+          example: "Jiný důvod"
+          type: string
+          description: Jiný důvod - pro variantu differentReason v contractTerminationReason
+        needAttachment:
+          type: string
+          description: |
+            jakou přílohu je potřeba doložit
+            - vehicleRegistrationRecord = výpis z registru vozidel, pro druh výpovědi Změna vlastníka nebo Vyřazení z registru vozidel
+            - policeProtocol = protokol Policie ČR, pro druh výpovědi Odcizení vozidla
+          enum:
+            - vehicleRegistrationRecord
+            - policeProtocol
+        terminationFileUrl:
+          type: string
+          example: "https://termination.url.suri.cz/signed/1234567890-2025-03-26T16_35_00.pdf"
+          description: URL souboru s výpovědí
+        terminationFileTime:
+          type: string
+          format: date-time
+          example: "2025-03-26T16:35:00"
+          description: čas vytvoření souboru s výpovědí
+        policyHolder:
+          type: object
+          required:
+          - phoneNumber
+          properties:
+            type:
+              example: "self-employed"
+              type: string
+              description: Typ osoby
+              enum:
+                - self-employed
+                - person	
+                - company
+            firstName:
+              type: string
+              example: "gab"
+            lastName:
+              type: string
+              example: "tester"
+            phoneNumber:
+              type: string
+              example: "733314663"
+            email:
+              type: string
+              example: "testing@renomia.cz"
+        provider:
+          type: object
+          required:
+          - companyIdentificationNumber
+          properties:
+            companyIdentificationNumber:
+              type: string
+              example: "27116913"
+            name:
+              type: string
+              example: "Pojišťovna VZP, a.s."
+            contentKey:
+              type: string
+              example: "vzp"
+        properties:
+          type: object
+          description: Informace a nastavení z CRM, FE aplikace tato data jen přenáší
+          properties:
+            agent:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: "pavel.zampach@suri.cz"
+                firstName:
+                  type: string
+                  example: "Pavel"
+                lastName:
+                  type: string
+                  example: "Žampach"
+                email:
+                  type: string
+                  example: "pavel.zampach@suri.cz"
+                phone:
+                  type: string
+                  example: "+420 123 456 789"
+            callFrom:
+              type: string
+              example: "ORDER: 801QI00000Wn9avYAB"
+        terminationState:
+          type: string
+          example: "processed"
+          enum:
+            - processed
+            - sentToClient
+            - clientSelf
+            - clientSigned
+            - waitingDocuments
+            - sentToInsurer
+          description: |
+            stav procesu výpovědi viz https://renomia.atlassian.net/wiki/spaces/ED/pages/3655827582/V+pov+2025+-+diagram+pro+FE
+            - processed - v průběhu vyplňování jsou odesílána data (ne na konci)
+            - sentToClient - target=agent - operátor odeslal klientovi
+            - clientSelf - není agent nebo pojišťovny csob,koop,direct,hvp,pillow,vzp,cpp
+            - clientSigned - je agent a uniqa
+            - waitingDocuments - je agent a slavia,allianz,gcp a needAttachment
+            - sentToInsurer - odesláno na pojišťovnu
+        linkId:
+          type: string
+          description: Id linku s daty v Linkbuilderu
+          example: "47347842-d982-469b-9c64-8a0452343bb2"

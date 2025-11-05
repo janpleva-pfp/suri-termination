@@ -1,0 +1,112 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "pfp-terminate.fullname" . }}
+  labels:
+    {{- include "pfp-terminate.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "pfp-terminate.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "pfp-terminate.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "pfp-terminate.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          env:
+          - name: OAUTH_CLIENT_ID
+            valueFrom:
+              secretKeyRef:
+                key: clientId
+                name: {{ required "app.inovisClientSecret must be specified" .Values.app.inovisClientSecret }}
+          - name: OAUTH_CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                key: secret
+                name: {{ required "app.inovisClientSecret must be specified" .Values.app.inovisClientSecret }}
+          - name: STORAGE_TOKEN_ENDPOINT
+            valueFrom:
+              secretKeyRef:
+                key: tokenEndpoint
+                name: {{ required "app.storageSecret must be specified" .Values.app.storageSecret }}
+          - name: STORAGE_CLIENT_ID
+            valueFrom:
+              secretKeyRef:
+                key: clientId
+                name: {{ required "app.storageSecret must be specified" .Values.app.storageSecret }}
+          - name: STORAGE_CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                key: clientSecret
+                name: {{ required "app.storageSecret must be specified" .Values.app.storageSecret }}
+          - name: STORAGE_SITE_ID
+            valueFrom:
+              secretKeyRef:
+                key: siteId
+                name: {{ required "app.storageSecret must be specified" .Values.app.storageSecret }}
+          - name: STORAGE_DRIVE_ID
+            valueFrom:
+              secretKeyRef:
+                key: driveId
+                name: {{ required "app.storageSecret must be specified" .Values.app.storageSecret }}
+          - name: EMAIL_SALT
+            valueFrom:
+              secretKeyRef:
+                key: email-salt
+                name: terminate-secrets
+          - name: OAUTH_GRANT_TYPE
+            value: {{ .Values.app.inovisOauthGrantType | quote }}
+          - name: OAUTH_SCOPE
+            value: {{ .Values.app.inovisOauthScope | quote }}
+          - name: INOVIS_API_URL
+            value: {{ .Values.app.inovisApiUrl | quote }}
+          - name: CONTENT_ENV
+            value: {{ .Values.app.env | quote }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /api/is-ready
+              port: 3000
+              scheme: HTTP
+          readinessProbe:
+            httpGet:
+              path: /api/is-ready
+              port: 3000
+              scheme: HTTP
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

@@ -1,0 +1,30 @@
+
+@import 'modules/mixins';
+@import 'modules/typography';
+@import 'modules/helpers';
+@import 'components/Containers';
+@import 'global/main';
+// import styles from pfp platform
+@import '~@pfp/frontend-platform/dist/style.css';
+
+@import 'components/modal';
+
+html,
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--clrDarkPrimary);
+  background-color: var(--clrBg);
+  font-family: var(--fontBody);
+}
+
+.btn {
+  color: var(--clrDarkPrimary);
+}
+
+.container {
+  @media screen and (max-width: 575px) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}

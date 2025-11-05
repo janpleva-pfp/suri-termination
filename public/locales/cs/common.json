@@ -1,0 +1,789 @@
+{
+  "gnvPageTitle": "Výpověď za klienta",
+  "basicInfoPageTitle": "K zjištění cen potřebujeme pár údajů",
+  "vehicleInfoPageTitle": "Údaje o vašem vozidle",
+  "tplPageTitle": "Povinné ručení pro",
+  "cicPageTitle": "Chraňte sami sebe i svůj vůz díky havarijnímu pojištění",
+  "cicPageSubtitle": "Zůstaňte chráněni i když nehodu způsobíte vy",
+  "cicPageSubtitlePerex": "Narozdíl od povinného ručení vám díky havarijnímu pojištění pojišťovna vyplatí peníze i v takové situaci, kdy si škodu na vozidle způsobíte vy, nebo neznámý viník.",
+  "cicTitle": "Havarijní pojištění pro",
+  "addonsPageTitle": "Rozšiřte si vaše pojištění o vhodná připojištění",
+  "addonsPagePerex": "Připojištěním maximalizujte svou ochranu a jezděte bez obav",
+  "acceptPageTitle": "Smlouva vznikne zaplacením první splátky",
+  "vehicleInfo": "Údaje o vozidle",
+  "vehicleAdditionalInfo": "Doplňující údaje o vozidle",
+  "basicInfo": "Základní údaje",
+  "tpl": "Povinné ručení",
+  "cic": "Havarijní pojištění",
+  "addons": "Připojištění",
+  "contractSteps": "Sjednání",
+  "unsupportedVehicleTypeTitle": "Na tuto kategorii vozidla vám rádi zavoláme a poskytneme kalkulaci a důležité informace.",
+  "finalSummary": "Finální shrnutí",
+  "cicInfoDetails": "Údaje pro havarijní pojištění",
+  "insuranceStartDetails": "Počátek pojištění",
+  "vehicleInfoDetails": "Informace o vozidle",
+  "policyHolderAddressDetails": "Adresa pojistníka",
+  "callCenterLabel": "Infolinka:",
+  "squareMeter": "m²",
+  "documentNameValues": {
+    "sessionMinutes": "Záznam z jednání",
+    "greenCard": "Zelená karta",
+    "greenCardFill": "Zelená karta",
+    "contract": "Pojistná smlouva",
+    "assistanceCard": "Asistenční karta",
+    "assistanceServicesKoop": "Asistenční sešit",
+    "productInfoLeaflet": "Informační dokument o pojistném produktu",
+    "vpp": "Informace o zpracování osobních údajů",
+    "assistanceServices": "Asistenční služby"
+  },
+  "trailerSubtypeValues": {
+    "-750": "Vozík do 750 kg",
+    "750-": "Vozík nad 750 kg",
+    "semi-trailer": "Návěs k tahači"
+  },
+  "pricesDependantNameValues": {
+    "numberOfDays": "(počet dní)"
+  },
+  "tplSortTitle": "Řazení povinného ručení",
+  "cicSortTitle": "Řazení havarijního pojištění",
+  "for": "pro",
+  "from": "od",
+  "price": "Cena",
+  "none": "žádné",
+  "isNot": "Není",
+  "vehicleSafetyItems": "Položky zabezpečení",
+  "vehicleEquipmentItems": "Položky vybavení",
+  "checkAndFillInInfo": "Zkontrolujte a doplňte zbylé údaje",
+  "showCicOffers": "Ukázat nabídky",
+  "continue": "Pokračovat",
+  "skipTheStep": "Přeskočit krok",
+  "nextStep": "Následující krok",
+  "previous": "Předchozí",
+  "previousStep": "Předchozí krok",
+  "modify": "Upravit",
+  "increase": "Navýšit",
+  "modifyDetails": "Upravit údaje",
+  "arrange": "Sjednat",
+  "close": "Zavřít",
+  "cancel": "Zrušit",
+  "cancelFilters": "Resetovat",
+  "payByCreditCard": "Zaplatit platební kartou",
+  "remove": "Odstranit",
+  "sendToEmail": "Odeslat na email",
+  "send": "Odeslat",
+  "save": "Uložit",
+  "select": "Vybrat",
+  "fillIn": "Doplnit",
+  "backToForm": "Zpět do formuláře",
+  "goToSummary": "Přejít na shrnutí",
+  "filter": "Filtrovat",
+  "chooseAddon": "Připojistit",
+  "sort": "Řadit",
+  "tryAgain": "Zkusit znovu",
+  "showOffers": "Ukázat nabídky",
+  "showOffer": "Ukázat nabídku",
+  "showOfferCondition": "Benefity a cenu nabídky smíme zobrazit až po kliku na tlačítko Ukázat nabídku.",
+  "iAmInterested": "Mám zájem",
+  "callBackTitle": "Zavoláme vám zpět",
+  "callBackOfferInfo": "Benefity a cenu nabídky Vám nabídneme přes telefon.",
+  "useData": "Použít údaje",
+  "iWantToBeContacted": "Chci být kontaktován",
+  "verifyBonus": "Ověřit bonus",
+  "pricesRecalculatedFor": "Ceny přepočítány pro",
+  "pricesRecalculatedForYears": "let",
+  "verifyYourBonusClaimTitleTopModule": "Ověřte si okamžitou slevu až 65 %",
+  "verifyYourBonusClaimPerexTopModule": "Díky svým naježděným bonusům si můžete cenu ihned snížit až o 65 %! Stačí zadat 2 údaje a uvidíte vaše přesné a konečné ceny.",
+  "verifyYourBonusClaimTitle": "Získejte ihned slevu až 65 % na všechny tyto nabídky.",
+  "verifyYourBonusClaimButton": "Získat slevu",
+  "verifiedBonusClaimPerex": "V ceně pojištění je nyní zahrnutý bonus za bezpečnou jízdu popř. malus v případě, že za sebou máte pojistnou událost.",
+  "verifyYourBonusClaimWarning": "Neověřili jste váš nárok na bonus u pojišťovny. Ceny se mohou během sjednání změnit.",
+  "whatWillFollowAfterFinish": "Co bude následovat po dokončení",
+  "badgeTypeValues": {
+    "favourite": "Oblíbené",
+    "tip": "Tip",
+    "important": "Důležité"
+  },
+  "externalCalculatorLink": "Sjednat v pojišťovně",
+  "showAll": "Zobrazit vše",
+  "showAllOffers": "Zobrazit všechny nabídky",
+  "couldNotLoadContent": "Obsah se nepodařilo načíst",
+  "couldNotLoadContentDescription": "V tuto chvíli jsme nenalezli vhodné pojištění, rádi s vámi však dostupné nabídky pojištění probereme telefonicky.",
+  "confirmationAfterPayment": "Potvrzení o vzniku pojištění Vám zašle pojišťovna až poté, co uhradíte první pojistné a dojde ke zpracování pojistné smlouvy.",
+  "offersOverview": "Přehled nabídek",
+  "userDetailsTitle": "Zadané údaje",
+  "userDetails": "Údaje o provozovateli",
+  "ownerDetails": "Údaje o vlastníkovi",
+  "chooseAddons": "Vyberte si libovolná připojištění dle vašich potřeb",
+  "howMuchForAddonAnnuallyLabel": "Kolik ročně zaplatíte pojišťovně:",
+  "selectedOffers": "Vybraná pojištění",
+  "userInfoTitle": "Pár informací o vás",
+  "userDetailsPerex": "Nebojte, tyto údaje jsou pouze vaše a nikam je neukládáme.",
+  "verifyBonusTitle": "Ověřit nárok na bonus",
+  "verifyBonus65PercentTitle": "Ověřte si nárok na bonus až 65 %",
+  "verifyBonusExactPriceTitle": "Získejte přesnou cenu díky ověření vašich bonusů",
+  "verifyBonusPerex": "Osobní údaje slouží pouze za účelem ověření bonusu u pojišťoven.",
+  "verifyBonusTimeoutPerex": "Údaje použijeme pouze jednorázově k online ověření bonusu u pojišťoven.",
+  "vehicle": "Vozidlo",
+  "policyHolder": "Pojistník",
+  "policyHolderDetails": "Údaje o pojistníkovi",
+  "user": "Provozovatel",
+  "vehicleUser": "Provozovatel vozidla",
+  "owner": "Vlastník",
+  "vehicleOwner": "Vlastník vozidla",
+  "health": "zdraví",
+  "property": "majetek",
+  "documentsToDownload": "Dokumenty ke stažení",
+  "allImportantDocumentsEmailLabel": "Veškeré důležité informace a dokumenty obdržíte na e-mail:",
+  "documentsAndOther": "Právní dokumenty",
+  "contractBeginsWith": "Pojistná smlouva vzniká zaplacením první splátky pojistného. Doporučené datum úhrady je",
+  "contractBeginsWithOr": ", jinak smlouva nevznikne.",
+  "documentsEmail": "Dokumenty a důležité informace obdržíte zároveň na svůj e-mail.",
+  "documentsEmailMoreInfo": "Potvrzení o vzniku pojištění Vám zašle pojišťovna až poté, co uhradíte pojistné a dojde k provoznímu zpracování pojistné smlouvy. V případě, že od nás získáte zelenou kartu s dočasnou platností, bude Vám celoroční zaslána přímo pojišťovnou. Dokumenty obdržíte nejpozději do 3 týdnů od data počátku pojištění.",
+  "documentsAfterFinishTitle": "Po dokončení budete mít ihned k dispozici:",
+  "documentsAfterFinish": {
+    "contract": "návrh pojistné smlouvy",
+    "greenCard": "zelenou kartu",
+    "paymentInfo": "údaje k platbě"
+  },
+  "day": "Den",
+  "month": "Měsíc",
+  "year": "Rok",
+  "today": "Dnes",
+  "totalPrice": "Celková cena",
+  "ofTariff": "pojištění",
+  "doYouNeedHelpCallUs": "Potřebujete poradit? Zavolejte nám",
+  "paymentPeriodLabel": "Jak chcete platit?",
+  "paymentPeriodTypeValues": {
+    "annually": "Ročně",
+    "semi-annually": "Pololetně",
+    "quarterly": "Čtvrtletně"
+  },
+  "coverageLimitLabel": "Varianta / výše limitu:",
+  "coverageParameteres": "Parametry připojištění:",
+  "offerSummaryInTheseDocuments": "Shrnutí pojištění najdete v následujících dokumentech",
+  "payTheInstallmentBy": "Splátku uhraďte do ",
+  "orByBankTransfer": "Nebo bankovním převodem",
+  "sameAsPolicyHolder": "Stejný s pojistníkem",
+  "other": "Jiný",
+  "iAmFirstVehicleOwner": "Jsem první vlastník vozidla",
+  "isVatPayerLabel": "Plátce DPH",
+  "ownerIsLabel": "Vlastník je:",
+  "userIsLabel": "Provozovatel je:",
+  "accountNumberLabel": "Číslo účtu:",
+  "variableSymbolLabel": "Variabilní symbol:",
+  "amountLabel": "Částka:",
+  "addressOfPermanentStayLabel": "Adresa trvalého bydliště:",
+  "addressOfPermanentStayCompanyLabel": "Trvalý pobyt / sídlo společnosti:",
+  "sendAllMailToMyAddress": "Veškerou poštu chci zasílat na adresu trvalého bydliště.",
+  "contactAddressLabel": "Korespondenční adresa:",
+  "districtHouseNoPlaceholder": "Č. popisné",
+  "houseNoPlaceholder": "Č. orientační",
+  "insuranceStartLabel": "Kdy má pojištění začít platit:",
+  "damagesUpToLabel": "Proplatí škodu do výše:",
+  "variantLabel": "Varianta:",
+  "chooseVariant": "Vyberte variantu",
+  "vehicleUsageLabel": "Na co vozidlo používáte:",
+  "vehicleUsageAlternateLabel": "Použití vozidla:",
+  "vehicleTypeLabel": "Druh vozidla:",
+  "vehicleSubtypeLabel": "Podtyp:",
+  "vehicleManufacturerLabel": "Tovární značka vozidla:",
+  "vehicleManufacturerByNameLabel": "Tovární značka vozidla (ručně):",
+  "vehicleModelLabel": "Model vozidla:",
+  "vehicleModelByNameLabel": "Model vozidla (ručně):",
+  "choosePlaceholder": "Vyberte",
+  "capacityLabel": "Objem válců:",
+  "powerLabel": "Výkon motoru:",
+  "vinLabel": "VIN:",
+  "seatsLabel": "Počet sedadel:",
+  "yearOfConstructionLabel": "Rok výroby:",
+  "technicalCardNoLabel": "Série a číslo technického průkazu:",
+  "firstRegisteredLabel": "Datum první registrace:",
+  "categoryLabel": "Kategorie:",
+  "weightLabel": "Váha:",
+  "weightDescriptiveLabel": "Hmotnost (největší technicky přípustná povolená):",
+  "rzpLabel": "Registrační značka:",
+  "rzpWithAbbreviationLabel": "SPZ (registrační značka):",
+  "ageLabel": "Věk:",
+  "agePlaceholder": "Např. 36",
+  "zipLabel": "PSČ:",
+  "zipPlaceholder": "Např. 12000",
+  "townLabel": "Město:",
+  "streetPlaceholder": "Ulice",
+  "phoneLabel": "Telefonní číslo:",
+  "phonePlaceholder": "Např. 773120672",
+  "iDoNotHaveVrp": "Neznám SPZ, vyplním údaje ručně",
+  "titleLabel": "Titul:",
+  "emailLabel": "Email:",
+  "countryLabel": "Občanství:",
+  "jobTitleLabel": "Pracovní pozice:",
+  "firstNameLabel": "Křestní jméno:",
+  "lastNameLabel": "Příjmení:",
+  "birthNumberLabel": "Rodné číslo:",
+  "birthNumberPlaceholder": "Např. 915603/4219",
+  "vrpPlaceholder": "Zadejte SPZ vozu",
+  "search": "Vyhledat",
+  "help": "Nápověda",
+  "vatIdLabel": "IČO:",
+  "companyNameOrVatIdLabel": "Název firmy / IČO:",
+  "companyNameOrVatIdPlaceholder": "Zadejte název firmy nebo IČO",
+  "userTypeLabel": "Jste:",
+  "userTypeAlternateLabel": "Typ osoby:",
+  "companyNameLabel": "Název společnosti:",
+  "selfEmployedOrCompany": "OSVČ nebo firma",
+  "userTypeValues": {
+    "person": "Fyzická osoba",
+    "company": "Firma",
+    "self-employed": "OSVČ"
+  },
+  "vehicleTypeValues": {
+    "car": "Osobní automobil",
+    "motorcycle": "Motocykl",
+    "van": "Užitkový automobil",
+    "truck": "Nákladní automobil",
+    "trailer": "Přípojné vozidlo",
+    "tractor": "Traktor",
+    "campervan": "Obytný automobil",
+    "work-machine": "Pracovní stroj",
+    "rig": "Tahač",
+    "bus": "Autobus",
+    "ambulance": "Sanitní vůz",
+    "quadbike": "Tří/čtyřkolka"
+  },
+  "vehicleUsageTypeValues": {
+    "private": "Běžný provoz",
+    "taxi": "Vozidla taxislužby",
+    "rental": "Půjčování",
+    "driving-school": "Autoškola",
+    "historic": "Historická s atestací",
+    "priority": "Přednostní",
+    "dangerous-load": "Nebezpečný náklad",
+    "delivery": "rozvoz zboží koncovému spotřebiteli"
+  },
+  "tariffCoverageFilterCicTitle": "Spoluúčast na škodě",
+  "tariffCoverageFilterCicPerex": "Jakou spoluúčast na škodě zvolíte?",
+  "tariffCoverageFilterTypeCicValues": {
+    "great": "Nízká spoluúčast",
+    "good": "Standardní spoluúčast",
+    "low": "Vysoká spoluúčast"
+  },
+  "tariffCoverageFilterTitle": "Krytí škod",
+  "tariffCoverageFilterPerex": "Jakou částkou Vás má pojišťovna krýt?",
+  "tariffCoverageFilterTypeValues": {
+    "great": "Skvělé krytí",
+    "good": "Dobré krytí",
+    "low": "Základní krytí"
+  },
+  "cicMinParticipation": "{{min}}% spoluúčast na škodě a více",
+  "cicMinMaxParticipation": "{{min}}% – {{max}}% spoluúčast na škodě",
+  "contractAndGreenCardEmailWithinMinutes": "Smlouvu a vaší zelenou kartu obdržíte na váš e-mail do 10 minut. Pojistná smlouva vznikne prvním zaplacením, které je možné provést v následujícím kroku.",
+  "coverageIncludedCicTitle": "Obsah havarijního pojištění",
+  "coverageIncludedCicPerex": "Jaká rizika si přeje mít krytá v rámci havarijního pojištění?",
+  "coverageIncludedTitle": "Připojištění v ceně",
+  "coverageIncludedPerex": "Jaká připojištění chcete mít součástí povinného ručení",
+  "cicCoverageIncludedPerex": "Jaká připojištění chcete mít součástí havarijního ručení",
+  "coverageTypeValues": {
+    "basicInsuranceRisks": "Požár, výbuch, přímý úder blesku, pád letadla",
+    "garden": "Stavební příslušenství a zahrada",
+    "waterAndFrostDamage": "Vodovodní škody a mráz",
+    "thievesAndPests": "Zloději a záškodníci",
+    "damageSupport": "Podpora při škodě",
+    "wiringDamage": "Elektro škody",
+    "buildingPartsThings": "Stavební součásti",
+    "valuableAtypicalThings": "Cenné a atypické věci",
+    "bicyclesAndStrollers": "Kola a kočárky",
+    "crash": "Havárie",
+    "vandalism": "Vandalismus",
+    "animal": "Střet se zvěří",
+    "cable": "Poškození zvěří",
+    "assistance": "Požár, výbuch, přímý úder blesku",
+    "directDisposal": "Nezaviněná nehoda",
+    "element": "Živelní pojištění",
+    "glass": "Pojištění skel",
+    "injuryDriver": "Vodovodní škody a mráz",
+    "injuryPassenger": "Úrazové pojištění všech osob",
+    "luggage": "Elektro škody",
+    "parentsDeath": "Úmrtí rodičů",
+    "spareCar": "Stavební součásti",
+    "theft": "Pojištění odcizení",
+    "legalAdvice": "Zloději a záškodníci",
+    "other": "Další benefity"
+  },
+  "sortTypeTitle": "Řazení nabídek",
+  "sortTypeValues": {
+    "sortBest": "Nejvíce benefitů v ceně",
+    "sortPriceAsc": "Od nejlevnějšího",
+    "sortPriceDesc": "Od nejdražšího"
+  },
+  "elCommunicationAgreedLabel": "Souhlasím, že mi pojišťovna bude dokumenty posílat emailem.",
+  "vehiclePriceLabel": "Cena vozidla:",
+  "priceExcludesVatLabel": "Cena je bez DPH",
+  "fuelLabel": "Palivo:",
+  "vehicleFuelTypeValues": {
+    "petrol": "Benzín",
+    "diesel": "Nafta",
+    "hybrid": "Hybrid",
+    "lpg": "LPG",
+    "cng": "CNG"
+  },
+  "mileageLabel": "Stav tachometru:",
+  "vehicleSafetyOptionTypeLabel": "Zabezpečení vozidla:",
+  "vehicleSafetyOptionTypeValues": {
+    "activeLookup": "Aktivní vyhledávání",
+    "carAlarm": "Autoalarm",
+    "immobiliser": "Imobilizér",
+    "mechanicalProtection": "Mechanické zabezpečení",
+    "monitoringDevice": "Pasivní vyhledávání",
+    "steeringWheelLock": "Blokování hřídele volantu",
+    "vinProtection": "Značení skel VIN kódem"
+  },
+  "vehicleEquipmentOptionTypeLabel": "Vybavení vozidla:",
+  "vehicleEquipmentOptionTypeValues": {
+    "automaticTransmission": "Automatická převodovka",
+    "drive4x4": "Pohon 4x4",
+    "parkingAssistant": "Parkovací asistent"
+  },
+  "acquisitionTypeLabel": "Způsob pořízení:",
+  "acquisitionTypeValues": {
+    "cash": "Hotovost",
+    "leasing": "Leasing",
+    "loan": "Půjčka"
+  },
+  "vehicleOriginTypeLabel": "Původ vozidla:",
+  "vehicleOriginTypeValues": {
+    "new": "Nové vozidlo",
+    "used": "Ojeté vozidlo nebo předváděcí vozidlo",
+    "abroad": "Nové nebo ojeté vozidlo ze zahraničí"
+  },
+  "dynamicFieldLabels": {
+    "seats": "Počet sedadel:"
+  },
+  "cppTplVehicleCheckup": "K vybranému pojištění se můžete objednat na prohlídku vozidla. Pokyny k prohlídce Vám zašleme e-mailem.",
+  "vehicleCheckUpRequired": "K vybranému pojištění je třeba zdokumentovat aktuální stav vozidla. Pokyny obdržíte na Váš e-mail.",
+  "contactUsWithQuestions": "V případě jakýchkoli dotazů nás kontaktujte",
+  "thankYouForYourTrust": "Děkujeme Vám za důvěru a těšíme se na příjemnou spolupráci!",
+  "forTeam": "Za tým",
+  "priceChangedError": "Omlouváme se, ale pojišťovna nám v tuto chvíli neumožňuje pojištění sjednat. Vyberte prosím jinou pojišťovnu, nebo to zkuste za chvíli.",
+  "priceChangedFrom": "Upozorňujeme, že nám pojišťovna změnila cenu z",
+  "priceChangedTo": "na",
+  "priceChangedReason": "Důvodů může být více, obvykle je to kvůli vaší pojistné historii nebo posouzením specifických údajů u vybrané pojišťovny.",
+  "tplOfferDescription": "{{limitHealth}}/{{limitProperty}} mil. Kč (zdraví/majetek)",
+  "cicOfferDescription": "{{limitPercent}}% spoluúčast na škodě\n (minimálně však {{limitValue}})",
+  "cicOfferDescriptionValueOnly": "{{limitValue}} spoluúčast na škodě",
+  "iAmListedAsVehicleUser": "Jsem uveden/a jako provozovatel vozidla v malém technickém průkazu.",
+  "bySendingTheFormYouAgreeWith": "Kliknutím na tlačítko “Zobrazit nabídky” potvrzujete, že jste se seznámil(a) s",
+  "termsAndConditionsTitle": "Informacemi o zpracování osobních údajů",
+  "garagedVehicle": "Parkuje vozidlo v garáži?",
+  "mileagePerYearLabel": "Roční nájezd:",
+  "vehicleImportedCPP": "Místo 1. registrace vozidla:",
+  "vehicleImportedCPPValues": {
+    "true": "Mimo ČR",
+    "false": "V ČR"
+  },
+  "isVehicleNewCPP": "Od doby první registrace v ČR uplynulo:",
+  "isVehicleNewCPPValues": {
+    "true": "méně než 2 roky",
+    "false": "2 roky a více"
+  },
+  "yes": "Ano",
+  "no": "Ne",
+  "kooperativaVehicleSevereDamageLabel": "Vozidlo bylo v minulosti vážněji poškozeno:",
+  "kooperativaVehicleSevereDamageDescriptionLabel": "Specifikujte podrobně rozsah poškození:",
+  "kooperativaVehicleMinorDamageLabel": "Vozidlo je v době uzavření smlouvy mírně poškozeno:",
+  "kooperativaVehicleMinorDamageDescriptionLabel": "Specifikujte podrobně rozsah poškození:",
+  "helpValueNames": {
+    "vehicleImported": "Informaci o tom, kde bylo vozidlo registrováno naleznete ve velkém technickém průkazu. Zvolte, zda proběhla první registrace v ČR, nebo v zahraničí. Pokud vyberete variantu zahraničí, je třeba doplnit informaci o tom, jak je to dlouho od doby, kdy bylo vozidlo zaregistrováno v ČR. Pokud k registraci teprve dojde, zvolte variantu \"méně než 2 roky\".",
+    "mileagePerYear": "Nutné pro výpočet Allianz a Pillow pojišťovny",
+    "garagedVehicle": "Zaškrtnutím potvrzujete to, že parkujete s pojišťovaným vozem v garáži a bude Vám aplikována sleva 5% na některá připojištění.",
+    "sameContactAddress": "Uniqa Insurance Group uplatňuje v kalkulaci koeficient 1,05 (přirážku 5 %) při zadání odlišné korespondenční adresy.",
+    "vatIdCompanyName": "Zadejte název firmy, nebo vaše IČO a údaje vám automaticky dohledáme.",
+    "manufacturer": "Může se stát, že svoji značku nenajdete. Pro tyto případy slouží varianta Ostatní, která umožní vyplnit značku ručně do dalšího pole.",
+    "model": "Může se stát, že svůj model nenajdete. Pro tyto případy slouží varianta Ostatní, která umožní vyplnit model ručně do dalšího pole.",
+    "capacity": "/img/help/capacity.png",
+    "power": "/img/help/power.png",
+    "weight": "/img/help/weight.png",
+    "seats": "/img/help/seats.png",
+    "vehicleCategory": "/img/help/category.png",
+    "phone": "Zadejte vaše telefonní číslo ve formátu '772 555 235'.",
+    "firstRegistered": "Datum první registrace naleznete na velkém technickém průkazu na přední straně, hned nad registrační značkou u prvního vlastníka vozu.",
+    "usage": "Nejčastější použití je běžné, pokud ale vozidlo částečně používáte například jako taxi, je potřeba uvést jako způsob užití taxislužbu.",
+    "vehiclePrice": "Cenu je třeba uvést tak, aby co nejvíce odpovídala realitě. Pokud si cenou nejste jisti, rádi vám poradíme na naší infolince.",
+    "priceExcludesVAT": "Uveďte hodnotu vozidla s DPH, za kterou se běžně prodává např. v online autobazarech. Pokud je na vozidlo uplatněn odečet DPH, uveďte cenu bez DPH.",
+    "mileage": "Pouze číslice bez mezer – např.: 124000. Není nutný přesný stav.",
+    "acquisitionType": "Zvolte způsob nejbližší tomu, jak jste vozidlo pořídili.",
+    "originType": "V případě, že máte vůz koupený jako předváděcí z autosalonu, je potřeba zvolit původ vozidla: Ojeté nebo předváděcí vozidlo.\nPokud se jedná o nový nebo ojetý vůz dovezený ze zahraničí, je potřeba zvolit původ vozidla: Nové nebo ojeté vozidlo ze zahraničí.",
+    "vrp": "Není-li RZ (SPZ) aktuálně k dispozici, stačí napsat “není”. Chybějící RZ je zapotřebí následně nahlásit na info@{{website}}, a to nejpozději do 1 měsíce od sjednání návrhu pojistné smlouvy.",
+    "technicalCardNo": "Není-li TP aktuálně k dispozici, stačí napsat “není”. Chybějící číslo TP je zapotřebí následně nahlásit na info@{{website}}, a to nejpozději do 1 měsíce od sjednání návrhu pojistné smlouvy.",
+    "insuranceStart": "Zadané datum musí být v rozmezí od {{dateFrom}} do {{dateTo}}. Pojištění nelze sjednat zpětně.",
+    "pillowGaraged": "Zaškrtnutím potvrzujete to, že parkujete s pojišťovaným vozem v garáži a bude Vám aplikována sleva 5% na některá připojištění.",
+    "kooperativaFirstRegistrationPlace": "Informaci o tom, kde bylo vozidlo registrováno naleznete ve velkém technickém průkazu. Zvolte, zda proběhla první registrace v ČR, nebo v zahraničí. Pokud vyberete variantu zahraničí, je třeba doplnit informaci o tom, jak je to dlouho od doby, kdy bylo vozidlo zaregistrováno v ČR. Pokud k registraci teprve dojde, zvolte variantu 'méně než 2 roky'.",
+    "vin": "VIN se skládá ze 17 znaků. Je uveden v technickém průkazu a také vyražen na výrobním štítku/rámu vozidla. Pokud má VIN méně znaků (týká se starších vozidel), je třeba před VIN kód doplnit příslušný počet nul.",
+    "birthNumber": "Osoby, které nemají rodné číslo (např. cizinci), uvedou číslo ve formátu RRMMDD9999 (muži), nebo RRMM+50DD9999 (ženy). Příklad ženy narozené 2. 5. 1977: 7755029999.",
+    "email": "Uvedením emailové adresy pojistník potvrzuje, že je jejím uživatelem a souhlasí aby mu pojistitel a zprostředkovatel zasílali dokumenty týkající se pojištění na uvedený email.",
+    "vehicleSafetyOptions": {
+      "activeLookup": "Monitorování vozidla s napojením na pult centrální ochrany. Zásah k vyhledání vozidla začíná ihned při pokusu o odcizení.",
+      "carAlarm": "Automatické poplašné zařízení, které akusticky nebo vizuálně upozorňuje na potíže.",
+      "immobiliser": "Elektronické zařízení, které blokuje řídící jednotku před vložením nesprávného klíče.",
+      "mechanicalProtection": "Zamykání řadící páky.",
+      "monitoringDevice": "Monitorování vozidla bez napojení na pult centrální ochrany. Vozidlo se začne vyhledávat až na základě oznámení klienta.",
+      "steeringWheelLock": "Dodatečné uzamykatelné mechanické zabezpečovací zařízení blokující hřídel volantu, které je pevně spojeno s karoserií vozidla. Pozor, nejedná se o standardní zámek řízení (volantu) dodávaný výrobcem vozidla.",
+      "vinProtection": "VIN kód vypískovaný (vyleptaný) na všech sklech vozu."
+    },
+    "vehicleEquipmentOptions": {
+      "automaticTransmission": "Automatická převodovka",
+      "drive4x4": "Pohon 4x4",
+      "parkingAssistant": "Parkovací asistent"
+    }
+  },
+  "dateOfConstructionShort": "r. v.",
+  "messageEnterValidRzp": "Prosím zadejte platnou SPZ.",
+  "messageRzpIsInvalid": "Zadaná SPZ není validní.",
+  "messageRzpDataMissing": "Pro danou SPZ se nepodařilo dohledat všechny údaje. Doplňte prosím chybějící údaje ručně.",
+  "messageVinNumberIsInvalid": "Pro danou SPZ se nepodařilo dohledat údaje. Doplňte prosím údaje ručně.",
+  "messageVinServiceUnavailable": "Služba je momentálně nedostupná, zadejte údaje o voze ručně.",
+  "messageInvalidBirthNumber": "Zadané rodné číslo není validní.",
+  "messageRequestIsMissingField": "V dotazu chybí položka: ",
+  "messageCallbackSuccess": "Žádost o kontakt byla zaznamenána. Budeme Vás kontaktovat co nejdříve (do 10min).",
+  "messageCallbackFail": "Žádost o kontakt se nepodařilo odeslat. Opakujte akci později.",
+  "messagePageLoadFail": "Při načítání stránky došlo k chybě. Obnovte stránku nebo opakujte akci později.",
+  "messageContractAcceptFail": "Požadavek se nepodařilo dokončit. Opakujte akci později nebo nás kontaktujte na infolince.",
+  "messageInvalidStartDate": "Počátek pojištění nesmí začínat v minulosti. Upravte prosím sekci Počátek pojištění.",
+  "messageDraftAntedatedFail": "Návrh smlouvy již není validní. Prosím, vraťte se zpět do formuláře a opakujte sjednání.",
+  "messageVehicleTypeCarOnlyFail": "Pilotní verze podporuje pouze osobní automobily.",
+  "messageContractAlreadyAccepted": "Žádost už bohužel není validní. Vytvořte prosím novou.",
+  "rating": "hodnocení",
+  "footerDisclaimer": "PFP s.r.o., všechna práva vyhrazena",
+  "callMe": "Zavolejte mi",
+  "getCall": "Nechte si zavolat",
+  "linkBuilderError": "Vyskytla se chyba v načítání dat, doplňte prosím chybějící údaje a pokračujte ke kalkulaci",
+  "coverageLimitValue": {
+    "BASIC": "PLUS",
+    "DOUBLE": "PLUS dvojnásobný limit",
+    "CAR_TIR": "CAR PLUS"
+  },
+  "cicOfferAdditionalInfoValues": {
+    "theft": "Pokud se zloději rozhodnou ukrást zrovna vaše vozidlo, pak vás neochrání ani fakt, že parkujete v garáži. Odcizení je havarijní riziko, díky kterému vám pojišťovna odcizený vůz proplatí a to v takové výši, za kolik byste vůz koupili hned ten samý den, ve stejné výbavě a stejným počtem najetých kilometrů.",
+    "crash": "Mezi škody, které bude pojišťovna považovat za havárii, patří také i střet se zvěří. Pokud si sjednáte Allrisk havarijní pojištění, budeme mít krytá všechna rizika, které je možné v rámci tohoto pojištění krýt.",
+    "vandalism": "Vandal vám vozidlo poškodí i na parkovišti u supermarketu. Poškrábané dveře klíčem, nebo utržené zpětné zrcátko pak můžete mít proplacené z vhodného havarijního pojištění.",
+    "element": "Při krupobití dosahují škody až na 30% hodnoty vašeho vozidla. Myslete na svoji peněženku a chraňte se výhodným havarijním pojištěním."
+  },
+  "callback": {
+    "label": {
+      "name": "Jméno a příjmení:",
+      "lastName": "Příjmení:",
+      "phone": "Telefonní číslo:"
+    },
+    "placeholder": {
+      "phone": "Např. 773 120 672"
+    }
+  },
+  "address": {
+    "heading": "Vyberte si to správné majetkové pojištění",
+    "label": {
+      "address": "Adresa:"
+    },
+    "placeholder": {
+      "address": "Zadejte adresu"
+    },
+    "ruianErrorModal": {
+      "title": "Bohužel je služba právě nedostupná",
+      "text": "Nechte nám na sebe kontakt a do pár hodin se vám ozve náš operátor."
+    },
+    "title": "Adresa"
+  },
+  "specification": {
+    "heading": {
+      "selection": "Co potřebujete pojistit?",
+      "specification": "Údaje o {{buildingType}}",
+      "flat": "bytu",
+      "family-house": "domu"
+    },
+    "form": {
+      "flat": {
+        "size": "Velikost bytu:",
+        "title": "Byt"
+      },
+      "building": {
+        "description": "Majetek spojený se zemí pevným základem.",
+        "price": {
+          "error": "Musí být celé kladné číslo v rozmezí {{minPrice}} - {{maxPrice}}.",
+          "help": "Pojistnou částku nastavte tak, abyste na základě zvolené částky byli schopni postavit vaši nemovitost opět ve stejném rozsahu a kvalitě při současných cenách. Nezapomeňte započítat i aktuální cenu materiálu. Zahrnovat by měla i náklady na odstranění zbytku stavby při totální škodě.",
+          "label": "Hodnota nemovitosti:"
+        },
+        "title": "Samotnou stavbu",
+        "size": {
+          "error": "Musí být celé kladné číslo",
+          "help": "Celková započitatelná plocha je podlahová plocha včetně chodeb, WC, koupelny a schodiště. Do této plochy se nezapočítávají plochy balkonů, lodžií, teras, plochy ostatních příslušenství bytu a nebytových prostor."
+        }
+      },
+      "buildingType": "Typ nemovitosti:",
+      "family-house": {
+        "size": "Velikost domu:",
+        "title": "Dům"
+      },
+      "household": {
+        "description": "Věci, které si odnesete při stěhování s sebou.",
+        "equipmentCategory": {
+          "title": "Hodnota vybavení v domácnosti",
+          "rudimentary": {
+            "label": "Prosté",
+            "description": "Domácnost je zařízena funkčně a účelně. Nábytek, podlahové krytiny, světla, spotřebiče, věci osobní potřeby (obuv, oblečení apod.) a ostatní věci jsou běžného provedení, převážně v nižších cenových relacích. Věci zvláštní hodnoty a cennosti tvoří jen malou část z celkové hodnoty."
+          },
+          "standard": {
+            "label": "Standardní",
+            "description": "Domácnost je vybavena množstvím doplňků. Nábytek, podlahové krytiny, světla, spotřebiče, věci osobní potřeby a ostatní věci jsou běžného provedení, převážně ve středních cenových relacích. Část zařízení domácnosti mohou tvořit i hodnotnější věci. Věci zvláštní hodnoty a cennosti tvoří spíše menší část z celkové hodnoty."
+          },
+          "extra": {
+            "label": "Nadstandardní",
+            "description": "Domácnost je zařízena velmi komfortně. Zařízení a věci osobní potřeby jsou převážně ve střední a vyšší cenové kategorii. Celkovou hodnotu majetku mohou významněji navyšovat i věci zvláštní hodnoty a cennosti."
+          }
+        },
+        "price": {
+          "error": "Musí být celé kladné číslo v rozmezí {{minPrice}} - {{maxPrice}}",
+          "presetError": "Vyberte jednu z možností",
+          "label": "Hodnota věcí v domácnosti:",
+          "button": {
+            "custom": "Jiná částka",
+            "howToCalculate": "Jak spočítat?",
+            "presetOptions": "Vyberu z předvyplněných"
+          }
+        },
+        "title": "Věci v domácnosti"
+      },
+      "insuranceType": {
+        "label": "Chci pojistit:",
+        "error": "Vyberte, co chcete pojistit"
+      }
+    },
+    "policyAgreement": {
+      "text": "Kliknutím na tlačítko “{{buttonLabel}}” potvrzujete, že jste se seznámil(a) s",
+      "title": "Informacemi o zpracování osobních údajů"
+    },
+    "showQuotes": "Zobrazit nabídky",
+    "title": "Specifikace"
+  },
+  "quotes": {
+    "addressErrorNotification": "Pro zadanou adresu se nepodařilo dohledat nabídky",
+    "header": "Pojištění pro váš ",
+    "selectModal": {
+      "error": {
+        "title": "Akce se nezdařila",
+        "text": "Pracujeme na nápravě. V případě dotazů nás kontaktujte na čísle {{phone}}."
+      },
+      "errorTryAgain": {
+        "button": "Zkusit znovu",
+        "text": "Zkuste prosím akci opakovat",
+        "title": "Něco se pokazilo"
+      }
+    },
+    "sortTypeHelp": {
+      "sortBest": "Dle Vámi poskytnutých informací a zvolených filtrů jsme pro Vás našli tyto kalkulace pojištění, které jsme seřadili dle počtu benefitů v daném pojištění bez zohlednění dalších parametrů pojištění. V případě rovnosti benefitů v daných pojištěních byla pojištění seřazena dle nižší ceny. Pořadí kalkulací není ovlivněno žádnou platbou či výhodou od pojistitelů či třetích osob.",
+      "sortPriceAsc": "Dle Vámi poskytnutých informací a zvolených filtrů jsme pro Vás našli tyto kalkulace pojištění, které jsme seřadili dle nejnižší ceny bez zohlednění dalších parametrů pojištění. Pořadí kalkulací není ovlivněno žádnou platbou či výhodou od pojistitelů či třetích osob.",
+      "sortPriceDesc": "Dle Vámi poskytnutých informací a zvolených filtrů jsme pro Vás našli tyto kalkulace pojištění, které jsme seřadili dle nejvyšší ceny bez zohlednění dalších parametrů pojištění. Pořadí kalkulací není ovlivněno žádnou platbou či výhodou od pojistitelů či třetích osob."
+    },
+    "title": "Nabídky",
+    "userDetailsBox": {
+      "insuranceType": {
+        "building": "Stavbu",
+        "buildingOnly": "Samotnou stavbu"
+      }
+    }
+  },
+  "contract-cancellation": {
+    "page-title": "Výpověď smlouvy",
+    "title": "Výpověď pojistné smlouvy",
+    "sections": {
+      "contract-info": "Údaje o smlouvě",
+      "policy-holder-info": "Údaje o pojistníkovi", 
+      "return-info": "Kam vrátit peníze",
+      "returnInfo": {
+        "title": "Kam vrátit peníze",
+        "subTitle": "Pokud vznikne přeplatek na pojistném, pojišťovna vám vrátí peníze."
+      },
+      "privacy-policy-description": "Odesláním formuláře potvrzujete, že jste se seznámil/a s {{link}}Informacemi o zpracování osobních údajů{{endLink}}.",
+      "basic": "Základní informace",
+      "policy-holder": "Majitel pojistky",
+      "overpayment": "Přeplatek",
+      "provider-info": "Informace o poskytovateli"
+    },
+    "overpayment-send-to": {
+      "bank-account": "Na bankovní účet",
+      "address": "Na adresu"
+    },
+    "overpaymentSendTo": {
+      "same-account": "Na účet ze kterého jsem platil/a",
+      "bankAccount": "Na bankovní účet",
+      "other-account": "Jiný účet",
+      "address": "Na adresu"
+    },
+    "messages": {
+      "submit-success": "Formulář byl úspěšně odeslán!",
+      "load-error": "Vaše data se nepodařilo načíst. Vyplňte je prosím znovu nebo přenačtěte stránku.",
+      "submit-error": "Došlo k chybě při odesílání formuláře. Zkuste to prosím znovu.",
+      "pdf-generation-error": "Došlo k chybě při generování PDF. Zkuste to prosím znovu.",
+      "email-send-error": "Došlo k chybě při odesílání e-mailu. Vaše výpověď byla uložena, ale e-mail se nepodařilo odeslat."
+    },
+    "validation": {
+      "digits-only": "Zadejte pouze číslice",
+      "zip-code-5-digits": "PSČ musí mít 5 číslic",
+      "zip-format": "PSČ musí mít 5 číslic",
+      "required": "Toto pole je povinné.",
+      "email": "E-mail musí být ve formátu \"priklad@e-mail.cz\".",
+      "phone": "Telefonní číslo musí být ve formátu \"772 555 235\".",
+      "bank-account": "Číslo účtu musí být ve formátu \"číslo/číslo\"."
+    },
+    "fields": {
+      "contract-number": "Číslo smlouvy",
+      "termination-reason": "Vyberte důvod výpovědi",
+      "different-reason": "Specifikujte jiný důvod",
+      "policy-holder-type": "Kdo jste",
+      "first-name": "Jméno",
+      "last-name": "Příjmení",
+      "birth-number": "Rodné číslo",
+      "email": "E-mail",
+      "phone": "Telefon",
+      "zip-code": "PSČ",
+      "town": "Město",
+      "street": "Ulice a číslo popisné",
+      "website": "Web",
+      "affiliate-id": "Affiliate ID",
+      "overpayment-send-to": "Kam odeslat přeplatek",
+      "overpaymentSendTo": "Kam odeslat přeplatek",
+      "bank-account": "Číslo bankovního účtu",
+      "bankAccount": "Číslo bankovního účtu",
+      "bank-account-number": "Číslo bankovního účtu",
+      "bic": "BIC kód",
+      "company-id": "IČO",
+      "provider-company-id": "IČO poskytovatele",
+      "provider-name": "Název poskytovatele",
+      "provider-content-key": "Klíč obsahu poskytovatele",
+      "insurance-company": "Vyberte vaši pojišťovnu"
+    },
+    "placeholders": {
+      "contract-number": "Zadejte číslo smlouvy",
+      "select-reason": "Vyberte důvod",
+      "different-reason": "Popište váš důvod ukončení smlouvy",
+      "first-name": "Zadejte jméno",
+      "last-name": "Zadejte příjmení",
+      "birth-number": "Zadejte rodné číslo",
+      "phone": "Zadejte telefonní číslo",
+      "zip-code": "Zadejte PSČ",
+      "company-name": "Název firmy / Jméno a příjmení",
+      "email": "priklad@email.cz",
+      "street": "Zadejte adresu",
+      "town": "Zadejte město",
+      "website": "https://example.com",
+      "affiliate-id": "Zadejte affiliate ID",
+      "bank-account": "1234567890/1234",
+      "bankAccount": "1234567890/1234",
+      "bank-account-number": "1234567890/1234",
+      "bic": "CEKOCZPP",
+      "company-id": "12345678",
+      "provider-company-id": "Zadejte IČO poskytovatele",
+      "provider-name": "Zadejte název poskytovatele",
+      "provider-content-key": "Zadejte klíč obsahu",
+      "insurance-company": "Vyberte pojišťovnu...",
+      "ico": "Zadejte IČO..."
+    },
+    "termination-reasons": {
+      "anniversary-of-insurance-contract": "Konec pojistného období",
+      "max-two-months-from-agreed": "Výpověď do 2 měsíců od data sjednání",
+      "one-month-from-change": "Výpověď do 1 měsíce od změny pojistného",
+      "disabled-vehicle": "Vyřazení z registru vozidel",
+      "change-of-owner-car": "Změna vlastníka vozidla",
+      "vehicle-stolen": "Krádež vozidla",
+      "different-reason": "Jiný důvod"
+    },
+    "policy-holder-types": {
+      "person": "Fyzická osoba",
+      "self-employed": "OSVČ nebo firma",
+      "company": "Právnická osoba"
+    },
+    "buttons": {
+      "submit": "Odeslat",
+      "edit-form": "Upravit výpověd",
+      "submitting": "Odesílání...",
+      "please-sign": "Prosím podepište",
+      "submit-with-signature": "Odeslat s podpisem",
+      "save": "Uložit"
+    },
+    "signature": {
+      "title": "Podpis",
+      "label": "Podpis pojistníka",
+      "required-title": "Podpis je vyžadován",
+      "required-message": "Pro dokončení výpovědi smlouvy je nutné formulář podepsat. Všechna pole formuláře jsou nyní uzamčena. Prosím podepište do pole níže a poté můžete formulář odeslat.",
+      "canvas-info":"Podepsat můžete jednoduše myší do prostoru.",
+      "download-pdf":"vypoved_smlouvy.pdf",
+      "clear":"Znovu podepsat"
+    },
+    "emailActions": {
+      "linkToClient": "Odeslán odkaz na podepsání klientem (linkToClient)",
+      "autoFinalization": "Dokončuje se automaticky (autofinalization)",
+      "instructionsToClient": "Instrukce pro klienta odeslány (instructionsToClient)",
+      "terminateToInsurer": "Odesláno na pojišťovnu (terminateToInsurer)",
+      "terminateToBackoffice": "K dokončení backoffice (terminateToBackoffice)",
+      "transferNotifyToClient": "Odeslat klientovi (transferNotifyToClient)"
+    },
+    "emailTo":{
+      "title":"E-mail byl odeslán na adresu",
+      "client":"klienta",
+      "insurer":"pojišťovny",
+      "clientService":"klientského servisu"
+    },
+    "terminationResult": {
+        "title":"Stav výpovědi CRM",
+        "processed": "Výpověď byla zpracována. (processed)",
+        "sentToClient": "Výpověď byla odeslána klientovi. (sentToClient)",
+        "clientSelf": "Výpověď bude klient zpracovávat sám. (clientSelf)",
+        "clientSigned": "Výpověď byla podepsána klientem. (clientSigned)",
+        "waitingDocuments": "Výpověď bude čekat na potřebné dokumenty. (waitingDocuments)",
+        "sentToInsurer": "Výpověď byla odeslána pojišťovně. (sentToInsurer)",
+        "sentForSignature": "Výpověď byla odeslána k podpisu. (sentForSignature)"
+    },
+    "finalScreen": {
+      "agentFinalScreen": {
+        "title":"Výpověď byla odeslána!",
+        "subTitle":"Byly provedeny následující kroky:",
+        "button":"Domovská stránka"
+      },
+      "autoFinalization": {
+        "title":"A máte hotovo! Teď už je to na nás.",
+        "subTitle":"Výpověď zkontrolujeme a odešleme do&nbsp;pojišťovny. Kopii vám zašleme na email: {{link}}",
+        "button":"Domovská stránka"
+      },
+      "userFinalization": {
+        "title":"Ještě není hotovo",
+        "requirements":"Už stačí jen:",
+        "step1":"Otevřít email: {{link}}",
+        "step2":"Přeposlat email od {{websiteName}} do&nbsp;pojišťovny&nbsp;🚀"
+      },
+      "documentsNeeded": {
+        "title":"Ještě není hotovo",
+        "requirements":"Už stačí jen:",
+        "step1":"Otevřít email: {{link}}",
+        "step2":"Přiložit dokument 📎",
+        "step3":"A vše odeslat do&nbsp;pojišťovny&nbsp;🚀"
+      },
+      "autoDocumentsNeeded": {
+        "title":"Ještě není hotovo",
+        "requirements":"Už stačí jen:",
+        "step1":"Otevřít email: {{link}}",
+        "step2":"Přiložit dokument 📎",
+        "step3":"A vše odeslat na adresu&nbsp;{{email}}&nbsp;🚀"
+      },
+      "appCard": {
+        "title": "Ještě nemáte naši aplikaci?",
+        "message": "S mobilní aplikací SURI.CZ máte vše kolem auta pod palcem."
+      }
+    },
+    "errorCard":{
+      "title": "Něco se nepovedlo",
+      "text": "Zkuste prosím stránku načíst znovu. Pokud problém přetrvává konktaktovat nás můžete na čísle:",
+      "availability": {
+        "working-days": "Po-Pá: 8:00 - 21:00",
+        "weekend": "So-Ne: 10:00 - 18:00"
+      },
+      "button": "Zkusit znovu"
+      
+    }
+  }
+}

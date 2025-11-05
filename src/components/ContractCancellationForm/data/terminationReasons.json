@@ -1,0 +1,30 @@
+[
+  {
+    "value": "anniversaryOfInsuranceContract",
+    "translationKey": "contract-cancellation.termination-reasons.anniversary-of-insurance-contract"
+  },
+  {
+    "value": "maxTwoMonthsFromChange",
+    "translationKey": "contract-cancellation.termination-reasons.max-two-months-from-agreed"
+  },
+  {
+    "value": "oneMonthFromChange",
+    "translationKey": "contract-cancellation.termination-reasons.one-month-from-change"
+  },
+  {
+    "value": "disabledVehicle",
+    "translationKey": "contract-cancellation.termination-reasons.disabled-vehicle"
+  },
+  {
+    "value": "changeOfOwnerCar",
+    "translationKey": "contract-cancellation.termination-reasons.change-of-owner-car"
+  },
+  {
+    "value": "vehicleStolen",
+    "translationKey": "contract-cancellation.termination-reasons.vehicle-stolen"
+  },
+  {
+    "value": "differentReason",
+    "translationKey": "contract-cancellation.termination-reasons.different-reason"
+  }
+]
