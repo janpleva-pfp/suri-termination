@@ -21,6 +21,7 @@
 .idea
 *.pem
 tsconfig.tsbuildinfo
+tsconfig.type-check.tsbuildinfo
 
 # debug
 npm-debug.log*
