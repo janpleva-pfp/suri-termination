@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Control, Controller, FieldError } from 'react-hook-form';
+import { Control, Controller, FieldError, useFormContext } from 'react-hook-form';
 
 import { SignatureField } from '../form/SignatureCanvas/SignatureField';
 // Controlled version for react-hook-form integration
@@ -39,6 +39,8 @@ export const ControlledSignatureField: React.FC<ControlledSignatureFieldProps> =
     tr,
     error,
   }) => {
+    const { clearErrors, formState } = useFormContext();
+
     return (
       <Controller
         control={control}
@@ -55,6 +57,7 @@ export const ControlledSignatureField: React.FC<ControlledSignatureFieldProps> =
             onChange={(value: any) => {
               field.onChange(value);
               if (onChange) onChange(value);
+              clearErrors(name);
             }}
             onEditClick={onEditClick}
             required={required}

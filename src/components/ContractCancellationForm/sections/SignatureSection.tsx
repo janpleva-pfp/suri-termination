@@ -70,7 +70,7 @@ const SignatureSection: React.FC<SignatureSectionProps> = ({
             </svg>
           )}
         </div>
-        <div data-field="signature" id="signature">
+        <div data-field="signature" id="signature" style={{ marginTop: '24px' }}>
           <ControlledSignatureField
             clearButtonText={tr('contract-cancellation.signature.clear')}
             control={control}

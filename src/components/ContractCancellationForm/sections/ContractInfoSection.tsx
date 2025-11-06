@@ -45,7 +45,7 @@ const ContractInfoSection: React.FC<ContractInfoSectionProps> = ({
             rules={{ required: tr('contract-cancellation.validation.required') }}
           />
         </div>
-        <div data-field="contractTerminationReason" id="contractTerminationReason">
+        <div data-field="contractTerminationReason" id="contractTerminationReason" style={{ marginTop: '24px' }}>
           <ControlledSelectField
             control={control}
             disabled={disabled}

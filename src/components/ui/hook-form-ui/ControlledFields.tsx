@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { AsyncSelectField, RadioGroupField, SelectField, TextField } from '@pfp/frontend-platform';
-import { Control, Controller, FieldError } from 'react-hook-form';
+import { Control, Controller, FieldError, useFormContext } from 'react-hook-form';
 
 import { useClientSide } from '@app/src/lib/hooks/useClientSide';
 // Wrapper for PFP TextField with react-hook-form
@@ -18,6 +18,8 @@ type ControlledInputFieldProps = {
 };
 export const ControlledInputField: React.FC<ControlledInputFieldProps> = React.memo(
   ({ name, control, label, placeholder, disabled = false, required = false, rules, error }) => {
+    const { clearErrors, formState } = useFormContext();
+
     return (
       <Controller
         control={control}
@@ -35,9 +37,9 @@ export const ControlledInputField: React.FC<ControlledInputFieldProps> = React.m
               name={name}
               onBlur={field.onBlur}
               onChange={(e: any) => {
-                // Handle both event object and direct value
                 const inputValue = e.target?.value || e;
                 field.onChange(inputValue);
+                clearErrors(name);
               }}
               placeholder={placeholder}
               showError={hasError}
@@ -65,6 +67,7 @@ type ControlledAsyncSelectFieldProps = {
 export const ControlledAsyncSelectField: React.FC<ControlledAsyncSelectFieldProps> = React.memo(
   ({ name, control, label, options, disabled = false, required = false, placeholder, rules, error }) => {
     const isClient = useClientSide();
+    const { clearErrors, formState } = useFormContext();
 
     return (
       <Controller
@@ -89,6 +92,7 @@ export const ControlledAsyncSelectField: React.FC<ControlledAsyncSelectFieldProp
               onChange={(selectedOption: any) => {
                 const value = selectedOption?.value || '';
                 field.onChange(value);
+                clearErrors(name);
               }}
               placeholder={placeholder}
               showError={hasError}
@@ -116,6 +120,7 @@ type ControlledRadioGroupFieldProps = {
 export const ControlledRadioGroupField: React.FC<ControlledRadioGroupFieldProps> = React.memo(
   ({ name, control, label, options, disabled = false, rules, error, horizontal }) => {
     const isClient = useClientSide();
+    const { clearErrors, formState } = useFormContext();
 
     return (
       <Controller
@@ -131,7 +136,10 @@ export const ControlledRadioGroupField: React.FC<ControlledRadioGroupFieldProps>
               isHorizontal={horizontal}
               label={label}
               name={name}
-              onChange={(value: string | number | boolean) => field.onChange(value)}
+              onChange={(value: string | number | boolean) => {
+                field.onChange(value);
+                clearErrors(name);
+              }}
               options={options}
               showError={hasError}
               value={field.value || ''}
@@ -157,6 +165,8 @@ type ControlledTextAreaFieldProps = {
 };
 export const ControlledTextAreaField: React.FC<ControlledTextAreaFieldProps> = React.memo(
   ({ name, control, label, placeholder, disabled = false, required = false, rules, error }) => {
+    const { clearErrors, formState } = useFormContext();
+
     return (
       <Controller
         control={control}
@@ -173,9 +183,9 @@ export const ControlledTextAreaField: React.FC<ControlledTextAreaFieldProps> = R
               label={label}
               name={name}
               onChange={(e: any) => {
-                // Handle both event object and direct value
                 const inputValue = e.target?.value || e;
                 field.onChange(inputValue);
+                clearErrors(name);
               }}
               placeholder={placeholder}
               showError={hasError}
@@ -218,17 +228,16 @@ export const ControlledPFPAsyncSelectField: React.FC<ControlledPFPAsyncSelectFie
     noOptionsMessage = 'No options',
     loadingMessage = 'Loading...',
   }) => {
+    const { clearErrors, formState } = useFormContext();
+
     return (
       <Controller
         control={control}
         name={name}
         render={({ field, fieldState }) => {
-          // Find the selected option object based on the field value
           const selectedOption = options.find((option) => option.value === field.value) || null;
           const hasError = !!fieldState.error || !!error;
           const errorMessage = fieldState.error?.message || error?.message;
-          // Always render SelectField initially to avoid hydration mismatch
-          // After hydration, conditionally upgrade to PFPAsyncSelectField
 
           return (
             <AsyncSelectField
@@ -246,6 +255,7 @@ export const ControlledPFPAsyncSelectField: React.FC<ControlledPFPAsyncSelectFie
               onChange={(selectedOption: any) => {
                 const value = selectedOption?.value || '';
                 field.onChange(value);
+                clearErrors(name);
               }}
               placeholder={placeholder}
               showError={hasError}
@@ -287,17 +297,16 @@ export const ControlledSelectField: React.FC<ControlledSelectFieldProps> = React
     error,
     noOptionsMessage = 'No options',
   }) => {
+    const { clearErrors, formState } = useFormContext();
+
     return (
       <Controller
         control={control}
         name={name}
         render={({ field, fieldState }) => {
-          // Find the selected option object based on the field value
           const selectedOption = options.find((option) => option.value === field.value) || null;
           const hasError = !!fieldState.error || !!error;
           const errorMessage = fieldState.error?.message || error?.message;
-          // Always render SelectField initially to avoid hydration mismatch
-          // After hydration, conditionally upgrade to PFPAsyncSelectField
 
           return (
             <SelectField
@@ -312,6 +321,7 @@ export const ControlledSelectField: React.FC<ControlledSelectFieldProps> = React
               onChange={(selectedOption: any) => {
                 const value = selectedOption?.value || '';
                 field.onChange(value);
+                clearErrors(name);
               }}
               options={options.length > 0 ? options : undefined}
               placeholder={placeholder}
