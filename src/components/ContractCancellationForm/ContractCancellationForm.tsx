@@ -95,8 +95,7 @@ const ContractCancellationForm: React.FC<ContractCancellationFormProps> = ({ ins
     clearErrors,
     trigger,
   } = useForm<ContractCancellationFormData>({
-    mode: 'onBlur', // Enable validation on blur
-    reValidateMode: 'onChange', // Re-validate on change after first validation
+    mode: 'onSubmit', // Enable validation only on submit
     defaultValues: defaultFormValues,
   });
   const DIGITS_ONLY_REGEX = /^\d+$/;
@@ -275,6 +274,39 @@ const ContractCancellationForm: React.FC<ContractCancellationFormProps> = ({ ins
   // Helper function to safely use translations - memoized
   const tr = useCallback((key: string, params?: Record<string, any>): string => t(key, params) as string, [t]);
 
+  // Helper function to scroll to the first error field
+  const scrollToFirstError = useCallback(() => {
+    const firstErrorKey = Object.keys(errors)[0];
+    if (!firstErrorKey) return;
+
+    const selectors = [
+      `[name="${firstErrorKey}"]`,
+      `#${firstErrorKey}`,
+      `[data-field="${firstErrorKey}"]`,
+    ];
+
+    let errorElement: HTMLElement | null = null;
+    for (const selector of selectors) {
+      errorElement = document.querySelector(selector);
+      if (errorElement) break;
+    }
+
+    if (errorElement) {
+      // Scroll to the element with some offset for better visibility
+      const elementPosition = errorElement.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = elementPosition - 100; // 100px offset from top
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
+
+      setTimeout(() => {
+        errorElement?.focus();
+      }, 300);
+    }
+  }, [errors]);
+
   // Custom submit handler that validates only relevant fields - memoized
   const handleFormSubmit = useCallback(
     async (e: React.FormEvent) => {
@@ -311,12 +343,16 @@ const ContractCancellationForm: React.FC<ContractCancellationFormProps> = ({ ins
         const isValid = await trigger(fieldsToValidate as any);
         if (!isValid) {
           setSubmitStatus('idle');
+          // Scroll to the first error field
+          setTimeout(() => scrollToFirstError(), 100);
           return;
         }
       } else {
         const isValid = await trigger();
         if (!isValid) {
           setSubmitStatus('idle');
+          // Scroll to the first error field
+          setTimeout(() => scrollToFirstError(), 100);
           return;
         }
       }
@@ -324,7 +360,7 @@ const ContractCancellationForm: React.FC<ContractCancellationFormProps> = ({ ins
       const data = watch();
       onSubmit(data);
     },
-    [showSignatureSection, watch, trigger, state.appState.linkBuilderData, contractCancellationRequestId],
+    [showSignatureSection, watch, trigger, state.appState.linkBuilderData, contractCancellationRequestId, scrollToFirstError],
   ); // onSubmit will be defined later
 
   // Form submission handler - executes after handleFormSubmit validates the form
