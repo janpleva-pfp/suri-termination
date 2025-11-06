@@ -64,24 +64,26 @@ const PolicyHolderSection: React.FC<PolicyHolderSectionProps> = ({
         <h2>{tr('contract-cancellation.sections.policy-holder-info')}</h2>
       </div>
       <Card disabled={disabled}>
-        <ControlledRadioGroupField
-          control={control}
-          disabled={disabled}
-          error={errors.policyHolderType}
-          horizontal={fieldOptions.horizontal}
-          label={tr('contract-cancellation.fields.policy-holder-type')}
-          name="policyHolderType"
-          options={[
-            { value: 'person', label: tr('contract-cancellation.policy-holder-types.person'), id: 'person' },
-            {
-              value: 'self-employed',
-              label: tr('contract-cancellation.policy-holder-types.self-employed'),
-              id: 'self-employed',
-            },
-          ]}
-          required={fieldOptions.required}
-          rules={fieldOptions.rules}
-        />
+        <div data-field="policyHolderType" id="policyHolderType">
+          <ControlledRadioGroupField
+            control={control}
+            disabled={disabled}
+            error={errors.policyHolderType}
+            horizontal={fieldOptions.horizontal}
+            label={tr('contract-cancellation.fields.policy-holder-type')}
+            name="policyHolderType"
+            options={[
+              { value: 'person', label: tr('contract-cancellation.policy-holder-types.person'), id: 'person' },
+              {
+                value: 'self-employed',
+                label: tr('contract-cancellation.policy-holder-types.self-employed'),
+                id: 'self-employed',
+              },
+            ]}
+            required={fieldOptions.required}
+            rules={fieldOptions.rules}
+          />
+        </div>
         {/* Additional fields only show after policy holder type is selected */}
         {watchedPolicyHolderType && (
           <div className="mt-4">

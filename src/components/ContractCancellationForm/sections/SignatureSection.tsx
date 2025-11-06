@@ -70,19 +70,21 @@ const SignatureSection: React.FC<SignatureSectionProps> = ({
             </svg>
           )}
         </div>
-        <ControlledSignatureField
-          clearButtonText={tr('contract-cancellation.signature.clear')}
-          control={control}
-          error={errors.signature}
-          label={tr('contract-cancellation.signature.label')}
-          name="signature"
-          onChange={onChange}
-          onEditClick={onEditClick}
-          required
-          rules={{ required: tr('contract-cancellation.validation.required') }}
-          showEditButton
-          tr={tr}
-        />
+        <div data-field="signature" id="signature">
+          <ControlledSignatureField
+            clearButtonText={tr('contract-cancellation.signature.clear')}
+            control={control}
+            error={errors.signature}
+            label={tr('contract-cancellation.signature.label')}
+            name="signature"
+            onChange={onChange}
+            onEditClick={onEditClick}
+            required
+            rules={{ required: tr('contract-cancellation.validation.required') }}
+            showEditButton
+            tr={tr}
+          />
+        </div>
       </Card>
     </div>
   );

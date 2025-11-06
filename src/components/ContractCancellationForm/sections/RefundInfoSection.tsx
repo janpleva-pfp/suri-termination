@@ -31,7 +31,7 @@ const RefundInfoSection: React.FC<RefundInfoSectionProps> = ({
         <p className="txt-18">{tr('contract-cancellation.sections.returnInfo.subTitle')}</p>
       </div>
       <Card disabled={disabled}>
-        <div>
+        <div data-field="overpaymentSendTo" id="overpaymentSendTo">
           <ControlledRadioGroupField
             control={control}
             disabled={disabled}

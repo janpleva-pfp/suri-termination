@@ -95,7 +95,8 @@ const ContractCancellationForm: React.FC<ContractCancellationFormProps> = ({ ins
     clearErrors,
     trigger,
   } = useForm<ContractCancellationFormData>({
-    mode: 'onSubmit', // Enable validation only on submit
+    mode: 'onSubmit',
+    reValidateMode: 'onChange',
     defaultValues: defaultFormValues,
   });
   const DIGITS_ONLY_REGEX = /^\d+$/;
@@ -280,9 +281,9 @@ const ContractCancellationForm: React.FC<ContractCancellationFormProps> = ({ ins
     if (!firstErrorKey) return;
 
     const selectors = [
-      `[name="${firstErrorKey}"]`,
-      `#${firstErrorKey}`,
       `[data-field="${firstErrorKey}"]`,
+      `#${firstErrorKey}`,
+      `[name="${firstErrorKey}"]`,
     ];
 
     let errorElement: HTMLElement | null = null;
@@ -292,9 +293,8 @@ const ContractCancellationForm: React.FC<ContractCancellationFormProps> = ({ ins
     }
 
     if (errorElement) {
-      // Scroll to the element with some offset for better visibility
       const elementPosition = errorElement.getBoundingClientRect().top + window.pageYOffset;
-      const offsetPosition = elementPosition - 100; // 100px offset from top
+      const offsetPosition = elementPosition - 100;
 
       window.scrollTo({
         top: offsetPosition,
@@ -302,7 +302,12 @@ const ContractCancellationForm: React.FC<ContractCancellationFormProps> = ({ ins
       });
 
       setTimeout(() => {
-        errorElement?.focus();
+        const focusable = errorElement?.querySelector('[role="combobox"], input, textarea, select, [tabindex]');
+        if (focusable) {
+          (focusable as HTMLElement).focus();
+        } else {
+          errorElement?.focus();
+        }
       }, 300);
     }
   }, [errors]);
