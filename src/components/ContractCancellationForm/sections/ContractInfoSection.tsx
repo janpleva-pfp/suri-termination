@@ -32,28 +32,32 @@ const ContractInfoSection: React.FC<ContractInfoSectionProps> = ({
         <h2>{tr('contract-cancellation.sections.contract-info')}</h2>
       </div>
       <Card disabled={disabled}>
-        <ControlledSelectField
-          control={control}
-          disabled={disabled}
-          error={errors.insuranceCompany}
-          label={tr('contract-cancellation.fields.insurance-company')}
-          name="insuranceCompany"
-          options={insuranceCompanyOptions}
-          placeholder={tr('contract-cancellation.placeholders.insurance-company')}
-          required={true}
-          rules={{ required: tr('contract-cancellation.validation.required') }}
-        />
-        <ControlledSelectField
-          control={control}
-          disabled={disabled}
-          error={errors.contractTerminationReason}
-          label={tr('contract-cancellation.fields.termination-reason')}
-          name="contractTerminationReason"
-          options={terminationReasonOptions}
-          placeholder={tr('contract-cancellation.placeholders.select-reason')}
-          required={true}
-          rules={{ required: tr('contract-cancellation.validation.required') }}
-        />
+        <div data-field="insuranceCompany" id="insuranceCompany">
+          <ControlledSelectField
+            control={control}
+            disabled={disabled}
+            error={errors.insuranceCompany}
+            label={tr('contract-cancellation.fields.insurance-company')}
+            name="insuranceCompany"
+            options={insuranceCompanyOptions}
+            placeholder={tr('contract-cancellation.placeholders.insurance-company')}
+            required={true}
+            rules={{ required: tr('contract-cancellation.validation.required') }}
+          />
+        </div>
+        <div data-field="contractTerminationReason" id="contractTerminationReason" style={{ marginTop: '24px' }}>
+          <ControlledSelectField
+            control={control}
+            disabled={disabled}
+            error={errors.contractTerminationReason}
+            label={tr('contract-cancellation.fields.termination-reason')}
+            name="contractTerminationReason"
+            options={terminationReasonOptions}
+            placeholder={tr('contract-cancellation.placeholders.select-reason')}
+            required={true}
+            rules={{ required: tr('contract-cancellation.validation.required') }}
+          />
+        </div>
         {watchedTerminationReason === 'differentReason' && (
           <ControlledTextAreaField
             control={control}

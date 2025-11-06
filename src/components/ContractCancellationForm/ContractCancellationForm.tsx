@@ -4,7 +4,7 @@ import { Button, getBrandConsent, getWebsiteFromDomain } from '@pfp/frontend-pla
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { Alert, Col, Container, Form, Row } from 'react-bootstrap';
-import { useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 import { TE_DEFAULT_PHONE_PREFIX } from '@app/constants/termination';
@@ -86,6 +86,12 @@ const ContractCancellationForm: React.FC<ContractCancellationFormProps> = ({ ins
     [],
   );
 
+  const methods = useForm<ContractCancellationFormData>({
+    mode: 'onSubmit',
+    reValidateMode: 'onChange',
+    defaultValues: defaultFormValues,
+  });
+
   const {
     control,
     watch,
@@ -94,11 +100,7 @@ const ContractCancellationForm: React.FC<ContractCancellationFormProps> = ({ ins
     unregister,
     clearErrors,
     trigger,
-  } = useForm<ContractCancellationFormData>({
-    mode: 'onBlur', // Enable validation on blur
-    reValidateMode: 'onChange', // Re-validate on change after first validation
-    defaultValues: defaultFormValues,
-  });
+  } = methods;
   const DIGITS_ONLY_REGEX = /^\d+$/;
   const ZIP_CODE_REGEX = /^\d{5}$/;
   const [statusText, setStatusText] = useState('contract-cancellation.messages.submit-error');
@@ -275,6 +277,43 @@ const ContractCancellationForm: React.FC<ContractCancellationFormProps> = ({ ins
   // Helper function to safely use translations - memoized
   const tr = useCallback((key: string, params?: Record<string, any>): string => t(key, params) as string, [t]);
 
+  // Helper function to scroll to the first error field
+  const scrollToFirstError = useCallback(() => {
+    const firstErrorKey = Object.keys(errors)[0];
+    if (!firstErrorKey) return;
+
+    const selectors = [
+      `[data-field="${firstErrorKey}"]`,
+      `#${firstErrorKey}`,
+      `[name="${firstErrorKey}"]`,
+    ];
+
+    let errorElement: HTMLElement | null = null;
+    for (const selector of selectors) {
+      errorElement = document.querySelector(selector);
+      if (errorElement) break;
+    }
+
+    if (errorElement) {
+      const elementPosition = errorElement.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = elementPosition - 100;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
+
+      setTimeout(() => {
+        const focusable = errorElement?.querySelector('[role="combobox"], input, textarea, select, [tabindex]');
+        if (focusable) {
+          (focusable as HTMLElement).focus();
+        } else {
+          errorElement?.focus();
+        }
+      }, 300);
+    }
+  }, [errors]);
+
   // Custom submit handler that validates only relevant fields - memoized
   const handleFormSubmit = useCallback(
     async (e: React.FormEvent) => {
@@ -311,12 +350,16 @@ const ContractCancellationForm: React.FC<ContractCancellationFormProps> = ({ ins
         const isValid = await trigger(fieldsToValidate as any);
         if (!isValid) {
           setSubmitStatus('idle');
+          // Scroll to the first error field
+          setTimeout(() => scrollToFirstError(), 100);
           return;
         }
       } else {
         const isValid = await trigger();
         if (!isValid) {
           setSubmitStatus('idle');
+          // Scroll to the first error field
+          setTimeout(() => scrollToFirstError(), 100);
           return;
         }
       }
@@ -324,7 +367,7 @@ const ContractCancellationForm: React.FC<ContractCancellationFormProps> = ({ ins
       const data = watch();
       onSubmit(data);
     },
-    [showSignatureSection, watch, trigger, state.appState.linkBuilderData, contractCancellationRequestId],
+    [showSignatureSection, watch, trigger, state.appState.linkBuilderData, contractCancellationRequestId, scrollToFirstError],
   ); // onSubmit will be defined later
 
   // Form submission handler - executes after handleFormSubmit validates the form
@@ -667,7 +710,8 @@ const ContractCancellationForm: React.FC<ContractCancellationFormProps> = ({ ins
               {tr(statusText)}
             </Alert>
           )}
-          <Form onSubmit={handleFormSubmit}>
+          <FormProvider {...methods}>
+            <Form onSubmit={handleFormSubmit}>
             {/* Section 1: Údaje o smlouvě */}
             {insuranceCompanyOptions && (
               <ContractInfoSection
@@ -773,6 +817,7 @@ const ContractCancellationForm: React.FC<ContractCancellationFormProps> = ({ ins
               </Row>
             </Container>
           </Form>
+          </FormProvider>
         </div>
       )}
     </Container>
